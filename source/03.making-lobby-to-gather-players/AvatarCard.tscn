@@ -1,0 +1,38 @@
+[gd_scene load_steps=3 format=3 uid="uid://bigcpllpppv5p"]
+
+[ext_resource type="Texture2D" uid="uid://bf2n8w81tdcff" path="res://02.sending-and-receiving-data/Avatars/female_idle.png" id="1_1uuaa"]
+[ext_resource type="Script" path="res://03.making-lobby-to-gather-players/AvatarCard.gd" id="1_b7fy1"]
+
+[node name="AvatarCard" type="Control"]
+custom_minimum_size = Vector2(170, 270)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 170.0
+offset_bottom = 259.0
+size_flags_vertical = 3
+script = ExtResource("1_b7fy1")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 2
+texture_repeat = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -40.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_1uuaa")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -26.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Name"
+horizontal_alignment = 1

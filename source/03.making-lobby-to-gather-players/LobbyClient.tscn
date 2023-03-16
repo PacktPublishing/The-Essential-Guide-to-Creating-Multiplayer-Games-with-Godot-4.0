@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://cc4j1ngtu0v6u"]
+
+[ext_resource type="Script" path="res://03.making-lobby-to-gather-players/LobbyClient.gd" id="1_lb6fs"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lb6fs")
+
+[node name="AvatarCardsScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -368.0
+offset_top = -154.0
+offset_right = 368.0
+offset_bottom = 154.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AvatarCardsHBoxContainer" type="HBoxContainer" parent="AvatarCardsScrollContainer"]
+layout_mode = 2
+size_flags_vertical = 4

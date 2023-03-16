@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://qymws6invp0o"]
+
+[ext_resource type="Script" path="res://01.setting-up-a-server/Server.gd" id="1_xhtat"]
+
+[node name="Server" type="Node"]
+script = ExtResource("1_xhtat")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 522.0
+offset_top = 67.0
+offset_right = 599.0
+offset_bottom = 93.0
+text = "I'm server"

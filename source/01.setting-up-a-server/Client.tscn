@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://bkp4sc0lf67yd"]
+
+[ext_resource type="Script" path="res://01.setting-up-a-server/Client.gd" id="1_73b8d"]
+
+[node name="Client" type="Node"]
+script = ExtResource("1_73b8d")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 521.0
+offset_top = 58.0
+offset_right = 598.0
+offset_bottom = 84.0
+text = "I'm client"

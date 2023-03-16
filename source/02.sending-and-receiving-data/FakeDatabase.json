@@ -1,0 +1,12 @@
+{
+  "user1": {
+	"password":"test",
+	"avatar":"res://02.sending-and-receiving-data/Avatars/female_idle.png",
+	"name":"Sakaki"
+  },
+  "user2": {
+	"password":"test",
+	"avatar":"res://02.sending-and-receiving-data/Avatars/player_idle.png",
+	"name":"Keyaki"
+  }
+}
