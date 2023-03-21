@@ -1,0 +1,43 @@
+[gd_scene load_steps=2 format=3 uid="uid://d01k17u387ahf"]
+
+[ext_resource type="Script" path="res://04.creating-an-online-chat/ChatControl.gd" id="1_tlyhj"]
+
+[node name="ChatControl" type="Control"]
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 176.0
+offset_top = -178.0
+offset_right = -176.0
+offset_bottom = -26.0
+grow_horizontal = 2
+grow_vertical = 0
+script = ExtResource("1_tlyhj")
+
+[node name="LineEdit" type="LineEdit" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 113.0
+grow_horizontal = 2
+follow_focus = true
+vertical_scroll_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+autowrap_mode = 3
+
+[connection signal="text_submitted" from="LineEdit" to="." method="_on_line_edit_text_submitted"]
