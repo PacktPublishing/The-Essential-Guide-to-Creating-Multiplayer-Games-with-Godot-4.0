@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://dsy8oy21ff58v"]
+
+[ext_resource type="Script" path="res://05.online-quiz/QuizWaitLabel.gd" id="1_fi36p"]
+
+[node name="WaitLabel" type="Label"]
+visible = false
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 87.0
+grow_horizontal = 2
+text = "Next round in..."
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("1_fi36p")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
