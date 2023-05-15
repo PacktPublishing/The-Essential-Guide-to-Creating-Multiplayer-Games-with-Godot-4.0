@@ -28,7 +28,7 @@ grow_horizontal = 1
 grow_vertical = 1
 
 [node name="WaitLabel" parent="." instance=ExtResource("3_rq8tv")]
-layout_mode = 0
-anchors_preset = 0
+layout_mode = 1
+offset_bottom = 70.0
 
 [connection signal="answered" from="QuizPanel" to="." method="_on_quiz_panel_answered"]

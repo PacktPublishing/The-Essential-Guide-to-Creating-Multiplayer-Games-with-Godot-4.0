@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dinggunv4ho2t"]
 
-[ext_resource type="Script" path="res://05.online-quiz/QuizLogin.gd" id="1_qjapy"]
+[ext_resource type="Script" path="res://05.online-quiz/QuizLobby.gd" id="1_7r7i1"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_oymwe"]
 font_color = Color(1, 0.2, 0.2, 1)
@@ -12,7 +12,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_qjapy")
+script = ExtResource("1_7r7i1")
 quiz_screen_scene = "res://05.online-quiz/QuizScreenClient.tscn"
 
 [node name="UserLineEdit" type="LineEdit" parent="."]
@@ -126,4 +126,4 @@ horizontal_alignment = 1
 [connection signal="text_submitted" from="UserLineEdit" to="." method="_on_UserLineEdit_text_submitted"]
 [connection signal="text_submitted" from="PasswordLineEdit" to="." method="_on_PasswordLineEdit_text_submitted"]
 [connection signal="pressed" from="LoginButton" to="." method="_on_LoginButton_pressed"]
-[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="StartButton" to="." method="_on_StartButton_pressed"]

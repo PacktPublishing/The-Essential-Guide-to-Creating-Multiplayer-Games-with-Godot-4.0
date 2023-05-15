@@ -37,6 +37,12 @@ func update_winner(winner_name):
 	lock_answers()
 
 
+@rpc("call_local")
+func player_missed(loser_name):
+	question_label.text = "%s missed the question!!" % loser_name
+	lock_answers()
+
+
 @rpc
 func update_question(new_question_index):
 	var question = available_questions.pop_at(new_question_index)

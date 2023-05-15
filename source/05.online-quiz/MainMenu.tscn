@@ -11,7 +11,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ucwig")
 server_scene = "res://05.online-quiz/QuizServer.tscn"
-client_scene = "res://05.online-quiz/QuizLogin.tscn"
+client_scene = "res://05.online-quiz/QuizLobby.tscn"
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1

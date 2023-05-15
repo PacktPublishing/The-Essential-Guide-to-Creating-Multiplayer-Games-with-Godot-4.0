@@ -3,6 +3,7 @@ extends Control
 const PORT = 9999
 
 @export var database_file_path = "res://02.sending-and-receiving-data/FakeDatabase.json"
+@export_file("*.tscn") var quiz_screen_scene_path = "res://05.online-quiz/QuizScreenServer.tscn"
 
 var peer = ENetMultiplayerPeer.new()
 var database = {}
@@ -42,7 +43,7 @@ func authenticate_player(user, password):
 
 @rpc("any_peer", "call_remote")
 func start_game():
-	get_tree().change_scene_to_file("res://05.online-quiz/QuizScreenServer.tscn")
+	get_tree().change_scene_to_file(quiz_screen_scene_path)
 	rpc("start_game")
 
 

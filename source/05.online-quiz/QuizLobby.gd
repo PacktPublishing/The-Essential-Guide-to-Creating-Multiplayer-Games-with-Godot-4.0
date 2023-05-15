@@ -13,13 +13,11 @@ const PORT = 9999
 @onready var logged_players_label = $LoggedPlayersColorRect/Label
 
 var peer = ENetMultiplayerPeer.new()
-var is_peer_connected = false
 
 
 func _ready():
 	peer.create_client(ADDRESS, PORT)
 	multiplayer.multiplayer_peer = peer
-	
 	
 	error_label.text = "Insert username and password"
 	user_line_edit.grab_focus()
@@ -81,7 +79,7 @@ func authentication_succeed(session_token):
 	start_button.grab_focus()
 
 
-func _on_start_button_pressed():
+func _on_StartButton_pressed():
 	rpc_id(get_multiplayer_authority(), "start_game")
 
 

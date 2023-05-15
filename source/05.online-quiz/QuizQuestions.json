@@ -3,18 +3,18 @@
 		{
 			"text": "Which of the following is not a Node?",
 			"alternatives": ["Sprite2D", "Line2D", "Area3D", "PackedScene"],
-			"correct_answer_index" : 3
+			"correct_answer_index": 3
 		},
 	"question_02":
 		{
 			"text": "Which of the following is an image file?",
 			"alternatives": ["Bot.png", "Landscape.txt", "BeautifulTown.json", "UglyDuck.md"],
-			"correct_answer_index" : 0
+			"correct_answer_index": 0
 		},
 	"question_03":
 		{
 			"text": "Which of the following is a sound file?",
 			"alternatives": ["Scream.txt", "Blabla.ogg", "Laser.gd", "Music.svg"],
-			"correct_answer_index" : 1
+			"correct_answer_index": 1
 		}
 }
