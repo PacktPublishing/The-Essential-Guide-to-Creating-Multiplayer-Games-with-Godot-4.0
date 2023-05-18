@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://c4j4u4p46c5vo"]
+[gd_scene load_steps=4 format=3 uid="uid://c4j4u4p46c5vo"]
 
 [ext_resource type="PackedScene" uid="uid://cagbt5td4pukp" path="res://06.building-online-checkers/Piece.tscn" id="1_pjt0j"]
 [ext_resource type="Texture2D" uid="uid://43ybxr7xfljj" path="res://06.building-online-checkers/BlackPiece.svg" id="2_1sheh"]
+[ext_resource type="Texture2D" uid="uid://c7dxkl28fibfx" path="res://06.building-online-checkers/BlackKing.svg" id="2_p2hfc"]
 
 [node name="Piece" instance=ExtResource("1_pjt0j")]
+king_texture = ExtResource("2_p2hfc")
 
-[node name="Sprite2D" parent="." index="0"]
+[node name="Sprite2D" parent="." index="1"]
 texture = ExtResource("2_1sheh")

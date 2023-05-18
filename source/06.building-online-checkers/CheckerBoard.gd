@@ -14,7 +14,6 @@ var meta_board = {}
 @onready var free_cells = $FreeCells
 
 var selected_piece = null
-var available_cells = []
 
 
 func _ready():
@@ -96,36 +95,41 @@ func select_piece(piece):
 		movement_directions = NEIGHBOR_CELLS_KING
 	
 	var selected_piece_cell = local_to_map(selected_piece.position)
-	for direction in movement_directions:
-		var capturing = search_available_cells(selected_piece_cell, direction)
-		if capturing:
-			break
+	search_available_cells(selected_piece_cell, movement_directions)
+
+
+func search_available_cells(current_cell, directions):
+	var available_cells = []
+	var capturing = false
+	for direction in directions:
+		var cell = current_cell + direction
+		
+		# Cell is out of the board's boundaries
+		if not cell in meta_board:
+			continue
+		var cell_content = meta_board[cell]
+		
+		# Cell is occupied
+		if not cell_content == null:
+			# The content of the cell is an opponent piece
+			if not cell_content.get_parent() == selected_piece.get_parent():
+				var capturing_cell = cell + direction
+				if not capturing_cell in meta_board:
+					continue
+				# There's a neighbor free cell in the capturing direction
+				if meta_board[capturing_cell] == null:
+					capturing = true
+					available_cells.append(capturing_cell)
+		elif not capturing:
+			available_cells.append(cell)
+
 	for cell in available_cells:
 		add_free_cell(cell)
-
-
-func search_available_cells(current_cell, direction):
-	var cell = current_cell + direction
-	var capturing = false
-	if not cell in meta_board:
-		return
-	var cell_content = meta_board[cell]
-	if cell_content == null:
-		available_cells.append(cell)
-	elif not cell_content.get_parent() == selected_piece.get_parent():
-		var capturing_cell = cell + direction
-		if capturing_cell in meta_board:
-			if meta_board[capturing_cell] == null:
-				available_cells.clear()
-				available_cells.append(cell + direction)
-				capturing = true
-	return capturing
 
 
 func clear_free_cells():
 	for child in free_cells.get_children():
 		child.queue_free()
-	available_cells.clear()
 
 
 func add_free_cell(cell):

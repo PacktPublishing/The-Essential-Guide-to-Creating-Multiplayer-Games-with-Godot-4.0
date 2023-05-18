@@ -3,11 +3,22 @@ extends Node2D
 signal selected
 signal deselected
 
-var is_selected = false
-var is_king = false
+@export var is_king = false: set = _set_is_king
+@export var king_texture = preload("res://06.building-online-checkers/WhiteKing.svg")
 
 @onready var area = $Area2D
 @onready var color_rect = $ColorRect
+@onready var sprite = $Sprite2D
+
+var is_selected = false
+
+
+func _set_is_king(new_value):
+	is_king = new_value
+	if not is_inside_tree():
+		await(ready)
+	if is_king:
+		sprite.texture = king_texture
 
 
 func _on_area_2d_input_event(viewport, event, shape_idx):
