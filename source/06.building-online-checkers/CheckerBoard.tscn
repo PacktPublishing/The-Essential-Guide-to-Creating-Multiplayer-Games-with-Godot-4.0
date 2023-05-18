@@ -1,0 +1,104 @@
+[gd_scene load_steps=7 format=3 uid="uid://b8xc43dpux62e"]
+
+[ext_resource type="Texture2D" uid="uid://bwx450b3csyrf" path="res://06.building-online-checkers/BoardTiles.svg" id="1_tbpr3"]
+[ext_resource type="Script" path="res://06.building-online-checkers/CheckerBoard.gd" id="2_kvmek"]
+[ext_resource type="PackedScene" uid="uid://c4j4u4p46c5vo" path="res://06.building-online-checkers/BlackPiece.tscn" id="3_kv0m4"]
+[ext_resource type="PackedScene" uid="uid://c5jm1q16fmoea" path="res://06.building-online-checkers/WhitePiece.tscn" id="4_k1uve"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7oixi"]
+texture = ExtResource("1_tbpr3")
+texture_region_size = Vector2i(64, 64)
+0:0/0 = 0
+1:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_w72o2"]
+tile_size = Vector2i(64, 64)
+sources/2 = SubResource("TileSetAtlasSource_7oixi")
+
+[node name="CheckerBoard" type="TileMap"]
+position = Vector2(384, 128)
+tile_set = SubResource("TileSet_w72o2")
+cell_quadrant_size = 64
+format = 2
+layer_0/tile_data = PackedInt32Array(0, 2, 0, 65537, 2, 0, 131072, 2, 0, 196609, 2, 0, 262144, 2, 0, 327681, 2, 0, 393216, 2, 0, 458753, 2, 0, 393218, 2, 0, 327683, 2, 0, 262146, 2, 0, 196611, 2, 0, 131074, 2, 0, 65539, 2, 0, 2, 2, 0, 4, 2, 0, 65541, 2, 0, 131076, 2, 0, 196613, 2, 0, 262148, 2, 0, 327685, 2, 0, 393220, 2, 0, 458757, 2, 0, 458755, 2, 0, 6, 2, 0, 131078, 2, 0, 65543, 2, 0, 196615, 2, 0, 262150, 2, 0, 327687, 2, 0, 393222, 2, 0, 458759, 2, 0, 458758, 65538, 0, 393223, 65538, 0, 327686, 65538, 0, 393221, 65538, 0, 458756, 65538, 0, 393219, 65538, 0, 327684, 65538, 0, 327682, 65538, 0, 458754, 65538, 0, 393217, 65538, 0, 458752, 65538, 0, 327680, 65538, 0, 262145, 65538, 0, 262147, 65538, 0, 262149, 65538, 0, 262151, 65538, 0, 196614, 65538, 0, 131079, 65538, 0, 65542, 65538, 0, 7, 65538, 0, 5, 65538, 0, 131077, 65538, 0, 65540, 65538, 0, 3, 65538, 0, 65538, 65538, 0, 1, 65538, 0, 65536, 65538, 0, 131073, 65538, 0, 131075, 65538, 0, 196612, 65538, 0, 196610, 65538, 0, 196608, 65538, 0)
+script = ExtResource("2_kvmek")
+
+[node name="BlackTeam" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="Piece" parent="BlackTeam" instance=ExtResource("3_kv0m4")]
+position = Vector2(96, 480)
+
+[node name="Piece2" parent="BlackTeam" instance=ExtResource("3_kv0m4")]
+position = Vector2(224, 480)
+
+[node name="Piece3" parent="BlackTeam" instance=ExtResource("3_kv0m4")]
+position = Vector2(352, 480)
+
+[node name="Piece4" parent="BlackTeam" instance=ExtResource("3_kv0m4")]
+position = Vector2(480, 480)
+
+[node name="Piece5" parent="BlackTeam" instance=ExtResource("3_kv0m4")]
+position = Vector2(32, 416)
+
+[node name="Piece6" parent="BlackTeam" instance=ExtResource("3_kv0m4")]
+position = Vector2(160, 416)
+
+[node name="Piece7" parent="BlackTeam" instance=ExtResource("3_kv0m4")]
+position = Vector2(288, 416)
+
+[node name="Piece8" parent="BlackTeam" instance=ExtResource("3_kv0m4")]
+position = Vector2(352, 352)
+
+[node name="Piece9" parent="BlackTeam" instance=ExtResource("3_kv0m4")]
+position = Vector2(96, 352)
+
+[node name="Piece10" parent="BlackTeam" instance=ExtResource("3_kv0m4")]
+position = Vector2(224, 224)
+
+[node name="Piece11" parent="BlackTeam" instance=ExtResource("3_kv0m4")]
+position = Vector2(416, 416)
+
+[node name="Piece12" parent="BlackTeam" instance=ExtResource("3_kv0m4")]
+position = Vector2(480, 352)
+
+[node name="WhiteTeam" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="Piece" parent="WhiteTeam" instance=ExtResource("4_k1uve")]
+position = Vector2(32, 32)
+
+[node name="Piece2" parent="WhiteTeam" instance=ExtResource("4_k1uve")]
+position = Vector2(160, 32)
+
+[node name="Piece3" parent="WhiteTeam" instance=ExtResource("4_k1uve")]
+position = Vector2(288, 32)
+
+[node name="Piece4" parent="WhiteTeam" instance=ExtResource("4_k1uve")]
+position = Vector2(416, 32)
+
+[node name="Piece5" parent="WhiteTeam" instance=ExtResource("4_k1uve")]
+position = Vector2(96, 224)
+
+[node name="Piece6" parent="WhiteTeam" instance=ExtResource("4_k1uve")]
+position = Vector2(224, 96)
+
+[node name="Piece7" parent="WhiteTeam" instance=ExtResource("4_k1uve")]
+position = Vector2(352, 224)
+
+[node name="Piece8" parent="WhiteTeam" instance=ExtResource("4_k1uve")]
+position = Vector2(480, 96)
+
+[node name="Piece9" parent="WhiteTeam" instance=ExtResource("4_k1uve")]
+position = Vector2(32, 160)
+
+[node name="Piece10" parent="WhiteTeam" instance=ExtResource("4_k1uve")]
+position = Vector2(160, 160)
+
+[node name="Piece11" parent="WhiteTeam" instance=ExtResource("4_k1uve")]
+position = Vector2(288, 160)
+
+[node name="Piece12" parent="WhiteTeam" instance=ExtResource("4_k1uve")]
+position = Vector2(416, 160)
+
+[node name="FreeCells" type="Node2D" parent="."]

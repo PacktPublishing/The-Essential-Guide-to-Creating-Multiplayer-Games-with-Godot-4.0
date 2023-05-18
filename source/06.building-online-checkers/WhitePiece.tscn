@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://c5jm1q16fmoea"]
+
+[ext_resource type="PackedScene" uid="uid://cagbt5td4pukp" path="res://06.building-online-checkers/Piece.tscn" id="1_vymad"]
+[ext_resource type="Texture2D" uid="uid://do11oqc1ewkou" path="res://06.building-online-checkers/WhitePiece.svg" id="2_nl4we"]
+
+[node name="Piece" instance=ExtResource("1_vymad")]
+
+[node name="Sprite2D" parent="." index="1"]
+texture = ExtResource("2_nl4we")

@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://c4j4u4p46c5vo"]
+
+[ext_resource type="PackedScene" uid="uid://cagbt5td4pukp" path="res://06.building-online-checkers/Piece.tscn" id="1_pjt0j"]
+[ext_resource type="Texture2D" uid="uid://43ybxr7xfljj" path="res://06.building-online-checkers/BlackPiece.svg" id="2_1sheh"]
+
+[node name="Piece" instance=ExtResource("1_pjt0j")]
+
+[node name="Sprite2D" parent="." index="0"]
+texture = ExtResource("2_1sheh")

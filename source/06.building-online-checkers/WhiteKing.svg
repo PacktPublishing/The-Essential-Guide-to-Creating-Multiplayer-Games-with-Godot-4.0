@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="256"
+   height="256"
+   viewBox="0 0 67.733333 67.733333"
+   version="1.1"
+   id="svg1713"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   sodipodi:docname="WhiteKing.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1715"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="1.1893044"
+     inkscape:cx="-26.065657"
+     inkscape:cy="142.09987"
+     inkscape:window-width="1920"
+     inkscape:window-height="1027"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1710" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-60.463789,-144.78466)">
+    <circle
+       style="fill:#f2f2f2;fill-opacity:1;stroke:#1a1a1a;stroke-width:5.55149;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:none;stroke-dashoffset:38.5102;stroke-opacity:1;paint-order:stroke markers fill;stop-color:#000000"
+       id="circle1138"
+       cx="94.330452"
+       cy="178.65132"
+       r="22.624258" />
+    <path
+       id="rect2126"
+       style="fill:#ffd42a;stroke-width:3.9005;stroke-linecap:round;stroke-linejoin:round;stroke-dashoffset:38.5102;paint-order:stroke markers fill;stop-color:#000000"
+       d="m 82.522657,159.3528 5.903899,6.43703 5.9039,-6.43703 5.903894,6.43703 5.9039,-6.43703 v 14.3867 H 82.522657 Z"
+       sodipodi:nodetypes="cccccccc" />
+  </g>
+</svg>
