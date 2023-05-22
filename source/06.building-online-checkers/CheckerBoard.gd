@@ -1,12 +1,12 @@
 extends TileMap
 
-const NEIGHBOR_CELLS_KING = [Vector2i(-1, -1), Vector2i(1, -1), Vector2i(1, 1), Vector2i(-1, 1)]
-const NEIGHBOR_CELLS_BLACK = [Vector2i(-1, -1), Vector2i(1, -1)]
-const NEIGHBOR_CELLS_WHITE = [Vector2i(1, 1), Vector2i(-1, 1)]
+const DIRECTIONS_CELLS_KING = [Vector2i(-1, -1), Vector2i(1, -1), Vector2i(1, 1), Vector2i(-1, 1)]
+const DIRECTIONS_CELLS_BLACK = [Vector2i(-1, -1), Vector2i(1, -1)]
+const DIRECTIONS_CELLS_WHITE = [Vector2i(1, 1), Vector2i(-1, 1)]
 
 enum Teams{BLACK, WHITE}
 
-var current_turn = Teams.WHITE
+var current_turn = Teams.BLACK
 var meta_board = {}
 
 @onready var black_team = $BlackTeam
@@ -20,7 +20,7 @@ func _ready():
 	create_meta_board()
 	map_pieces(black_team)
 	map_pieces(white_team)
-	toggle_turn()
+	enable_pieces(black_team)
 
 
 func create_meta_board():
@@ -37,6 +37,7 @@ func map_pieces(team):
 
 func toggle_turn():
 	clear_free_cells()
+	selected_piece.deselect()
 	if current_turn == Teams.BLACK:
 		current_turn = Teams.WHITE
 		disable_pieces(black_team)
@@ -52,7 +53,12 @@ func _on_piece_selected(piece):
 
 
 func _on_free_cell_selected(free_cell_position):
-	move_selected_piece(local_to_map(free_cell_position))
+	var free_cell = local_to_map(free_cell_position)
+	if can_capture(selected_piece):
+		capture_pieces(free_cell)
+	else:
+		move_selected_piece(free_cell)
+	toggle_turn()
 
 
 func move_selected_piece(target_cell):
@@ -63,8 +69,6 @@ func move_selected_piece(target_cell):
 	meta_board[current_cell] = null
 	meta_board[target_cell] = selected_piece
 	crown()
-	toggle_turn()
-	selected_piece.deselect()
 
 
 func crown():
@@ -84,12 +88,11 @@ func enable_pieces(team):
 		var capturing = can_capture(piece)
 		if capturing:
 			capturing_pieces.append(piece)
-		else:
+		elif search_available_cells(piece).size() > 0:
 			available_pieces.append(piece)
 	if capturing_pieces.size() > 0:
 		for piece in capturing_pieces:
 			piece.enable()
-			piece.set_capturing(true)
 	else:
 		for piece in available_pieces:
 			piece.enable()
@@ -98,15 +101,10 @@ func enable_pieces(team):
 func disable_pieces(team):
 	for piece in team.get_children():
 		piece.disable()
-		piece.set_capturing(false)
 
 
 func can_capture(piece):
-	var directions = NEIGHBOR_CELLS_BLACK
-	if current_turn == Teams.WHITE:
-		directions = NEIGHBOR_CELLS_WHITE
-	if piece.is_king:
-		directions = NEIGHBOR_CELLS_KING
+	var directions = get_piece_directions(piece)
 	var capturing = false
 	for direction in directions:
 		var current_cell = local_to_map(piece.position)
@@ -130,7 +128,8 @@ func can_capture(piece):
 	return capturing
 
 
-func capture_pieces(origin_cell, target_cell):
+func capture_pieces(target_cell):
+	var origin_cell = local_to_map(selected_piece.position)
 	var direction = Vector2(target_cell - origin_cell).normalized()
 	direction = Vector2i(direction.round())
 	var cell = target_cell - direction
@@ -142,30 +141,38 @@ func capture_pieces(origin_cell, target_cell):
 	if cell_content:
 		cell_content.queue_free()
 		meta_board[cell] = null
+		move_selected_piece(target_cell)
+	if can_capture(selected_piece):
+		target_cell = target_cell + (direction * 2)
+		capture_pieces(target_cell)
 
 
 func select_piece(piece):
 	clear_free_cells()
 	selected_piece = piece
-	var movement_directions = []
-	
-	match current_turn:
-		Teams.BLACK:
-			movement_directions = NEIGHBOR_CELLS_BLACK
-		Teams.WHITE:
-			movement_directions = NEIGHBOR_CELLS_WHITE
-	if piece.is_king:
-		movement_directions = NEIGHBOR_CELLS_KING
 	
 	var selected_piece_cell = local_to_map(selected_piece.position)
-	var available_cells = search_available_cells(selected_piece_cell, movement_directions)
+	var available_cells = search_available_cells(selected_piece)
 	for cell in available_cells:
 		add_free_cell(cell)
 
 
-func search_available_cells(current_cell, directions):
+func get_piece_directions(piece):
+	var directions = []
+	if piece.team == Teams.BLACK:
+		directions = DIRECTIONS_CELLS_BLACK
+	else:
+		directions = DIRECTIONS_CELLS_WHITE
+	if piece.is_king:
+		directions = DIRECTIONS_CELLS_WHITE
+	return directions
+
+
+func search_available_cells(piece):
 	var available_cells = []
 	var capturing = false
+	var directions = get_piece_directions(piece)
+	var current_cell = local_to_map(piece.position)
 	for direction in directions:
 		var cell = current_cell + direction
 		
@@ -177,7 +184,7 @@ func search_available_cells(current_cell, directions):
 		# Cell is occupied
 		if not cell_content == null:
 			# The content of the cell is an opponent piece
-			if not cell_content.team == selected_piece.team:
+			if not cell_content.team == piece.team:
 				var capturing_cell = cell + direction
 				# There's no cells to move to after capturing, so capturing isn't possible
 				if not capturing_cell in meta_board:
@@ -194,7 +201,7 @@ func search_available_cells(current_cell, directions):
 								continue
 							cell_content = meta_board[neighbor_cell]
 							# Removes cells that don't lead to capturing if
-							if cell_content == null or cell_content == selected_piece:
+							if cell_content == null or cell_content == piece:
 								available_cells.erase(available_cell)
 					available_cells.append(capturing_cell)
 		elif not capturing:

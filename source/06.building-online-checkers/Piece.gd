@@ -10,8 +10,8 @@ enum Teams{BLACK, WHITE}
 @export var king_texture = preload("res://06.building-online-checkers/WhiteKing.svg")
 
 @onready var area = $Area2D
-@onready var selected_color_rect = $SelectColorRect
-@onready var capturing_color_rect = $CapturingColorRect
+@onready var selected_color_rect = $SelectedColorRect
+@onready var enabled_color_rect = $EnabledColorRect
 @onready var sprite = $Sprite2D
 
 var is_selected = false
@@ -48,11 +48,9 @@ func deselect():
 
 func enable():
 	area.input_pickable = true
+	enabled_color_rect.visible = true
 
 
 func disable():
 	area.input_pickable = false
-
-
-func set_capturing(capturing):
-	capturing_color_rect.visible = capturing
+	enabled_color_rect.visible = false
