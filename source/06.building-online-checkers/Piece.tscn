@@ -13,7 +13,7 @@ properties/0/sync = true
 [node name="Piece" type="Node2D" groups=["pieces"]]
 script = ExtResource("1_85g0y")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="SelectColorRect" type="ColorRect" parent="."]
 visible = false
 offset_left = -32.0
 offset_top = -32.0
@@ -21,6 +21,15 @@ offset_right = 32.0
 offset_bottom = 32.0
 mouse_filter = 2
 color = Color(0.160784, 1, 0.678431, 1)
+
+[node name="CapturingColorRect" type="ColorRect" parent="."]
+visible = false
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+mouse_filter = 2
+color = Color(1, 0.34902, 0.631373, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 

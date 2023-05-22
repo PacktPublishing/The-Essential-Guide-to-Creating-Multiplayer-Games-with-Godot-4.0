@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://do11oqc1ewkou" path="res://06.building-online-checkers/WhitePiece.svg" id="2_nl4we"]
 
 [node name="Piece" instance=ExtResource("1_vymad")]
+team = 1
 
-[node name="Sprite2D" parent="." index="1"]
+[node name="Sprite2D" parent="." index="2"]
 texture = ExtResource("2_nl4we")

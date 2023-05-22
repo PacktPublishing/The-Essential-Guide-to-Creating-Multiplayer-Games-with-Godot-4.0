@@ -3,11 +3,15 @@ extends Node2D
 signal selected
 signal deselected
 
+enum Teams{BLACK, WHITE}
+
+@export var team: Teams = Teams.BLACK
 @export var is_king = false: set = _set_is_king
 @export var king_texture = preload("res://06.building-online-checkers/WhiteKing.svg")
 
 @onready var area = $Area2D
-@onready var color_rect = $ColorRect
+@onready var selected_color_rect = $SelectColorRect
+@onready var capturing_color_rect = $CapturingColorRect
 @onready var sprite = $Sprite2D
 
 var is_selected = false
@@ -30,14 +34,14 @@ func _on_area_2d_input_event(viewport, event, shape_idx):
 func select():
 	get_tree().call_group("selected", "deselect")
 	add_to_group("selected")
-	color_rect.show()
+	selected_color_rect.show()
 	is_selected = true
 	selected.emit()
 
 
 func deselect():
 	remove_from_group("selected")
-	color_rect.hide()
+	selected_color_rect.hide()
 	is_selected = false
 	deselected.emit()
 
@@ -48,3 +52,7 @@ func enable():
 
 func disable():
 	area.input_pickable = false
+
+
+func set_capturing(capturing):
+	capturing_color_rect.visible = capturing

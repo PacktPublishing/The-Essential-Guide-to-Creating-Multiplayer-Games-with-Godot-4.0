@@ -7,5 +7,5 @@
 [node name="Piece" instance=ExtResource("1_pjt0j")]
 king_texture = ExtResource("2_p2hfc")
 
-[node name="Sprite2D" parent="." index="1"]
+[node name="Sprite2D" parent="." index="2"]
 texture = ExtResource("2_1sheh")
