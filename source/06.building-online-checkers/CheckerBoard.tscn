@@ -62,7 +62,7 @@ position = Vector2(224, 352)
 position = Vector2(352, 352)
 
 [node name="Piece12" parent="BlackTeam" instance=ExtResource("3_kv0m4")]
-position = Vector2(480, 352)
+position = Vector2(416, 288)
 
 [node name="WhiteTeam" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
@@ -101,4 +101,4 @@ position = Vector2(160, 160)
 position = Vector2(288, 160)
 
 [node name="Piece12" parent="WhiteTeam" instance=ExtResource("4_k1uve")]
-position = Vector2(416, 160)
+position = Vector2(480, 224)

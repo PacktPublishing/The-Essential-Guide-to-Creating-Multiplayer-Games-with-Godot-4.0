@@ -170,41 +170,29 @@ func get_piece_directions(piece):
 
 func search_available_cells(piece):
 	var available_cells = []
-	var capturing = false
+	var capturing = can_capture(piece)
 	var directions = get_piece_directions(piece)
 	var current_cell = local_to_map(piece.position)
+	
 	for direction in directions:
 		var cell = current_cell + direction
-		
-		# Cell is out of the board's boundaries
 		if not cell in meta_board:
 			continue
 		var cell_content = meta_board[cell]
-		
-		# Cell is occupied
 		if not cell_content == null:
-			# The content of the cell is an opponent piece
 			if not cell_content.team == piece.team:
 				var capturing_cell = cell + direction
-				# There's no cells to move to after capturing, so capturing isn't possible
 				if not capturing_cell in meta_board:
 					continue
-				# There's a neighbor free cell in the capturing direction
 				cell_content = meta_board[capturing_cell]
 				if cell_content == null:
-					capturing = true
-					# Checks if previous cells lead to capturing, otherwise they are removed
-					for available_cell in available_cells:
-						for _direction in directions:
-							var neighbor_cell = available_cell - _direction
-							if not neighbor_cell in meta_board:
-								continue
-							cell_content = meta_board[neighbor_cell]
-							# Removes cells that don't lead to capturing if
-							if cell_content == null or cell_content == piece:
-								available_cells.erase(available_cell)
 					available_cells.append(capturing_cell)
-		elif not capturing:
+					continue
+				else:
+					continue
+			else:
+				continue
+		if not capturing:
 			available_cells.append(cell)
 	return available_cells
 
