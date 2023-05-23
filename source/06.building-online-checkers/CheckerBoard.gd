@@ -109,22 +109,19 @@ func can_capture(piece):
 	for direction in directions:
 		var current_cell = local_to_map(piece.position)
 		var neighbor_cell = current_cell + direction
-		# Cell is out of the board's boundaries
-		if not neighbor_cell in meta_board:
+		if not is_on_board(neighbor_cell):
+			continue
+		if is_free_cell(neighbor_cell):
 			continue
 		var cell_content = meta_board[neighbor_cell]
-		# Cell is occupied
-		if not cell_content == null:
-			# The content of the cell is an opponent piece
-			if not cell_content.team == piece.team:
-				var capturing_cell = neighbor_cell + direction
-				# There's no cells to move to after capturing, so capturing isn't possible
-				if not capturing_cell in meta_board:
-					continue
-				# There's a neighbor free cell in the capturing direction
-				cell_content = meta_board[capturing_cell]
-				if cell_content == null:
-					capturing = true
+		if not is_opponent(neighbor_cell):
+			continue
+		var capturing_cell = neighbor_cell + direction
+		if not is_on_board(capturing_cell):
+			continue
+		cell_content = meta_board[capturing_cell]
+		if is_free_cell(capturing_cell):
+			capturing = true
 	return capturing
 
 
@@ -134,7 +131,7 @@ func capture_pieces(target_cell):
 	direction = Vector2i(direction.round())
 	var cell = target_cell - direction
 	
-	if not cell in meta_board:
+	if not is_on_board(cell):
 		return
 	
 	var cell_content = meta_board[cell]
@@ -164,7 +161,7 @@ func get_piece_directions(piece):
 	else:
 		directions = DIRECTIONS_CELLS_WHITE
 	if piece.is_king:
-		directions = DIRECTIONS_CELLS_WHITE
+		directions = DIRECTIONS_CELLS_KING
 	return directions
 
 
@@ -176,16 +173,14 @@ func search_available_cells(piece):
 	
 	for direction in directions:
 		var cell = current_cell + direction
-		if not cell in meta_board:
+		if not is_on_board(cell):
 			continue
-		var cell_content = meta_board[cell]
-		if not cell_content == null:
-			if not cell_content.team == piece.team:
+		if not is_free_cell(cell):
+			if is_opponent(cell):
 				var capturing_cell = cell + direction
-				if not capturing_cell in meta_board:
+				if not is_on_board(capturing_cell):
 					continue
-				cell_content = meta_board[capturing_cell]
-				if cell_content == null:
+				if is_free_cell(capturing_cell):
 					available_cells.append(capturing_cell)
 					continue
 				else:
@@ -195,6 +190,24 @@ func search_available_cells(piece):
 		if not capturing:
 			available_cells.append(cell)
 	return available_cells
+
+
+func is_opponent(cell):
+	var is_opponent = false
+	if not is_free_cell(cell):
+		if not meta_board[cell].team == current_turn:
+			is_opponent = true
+	return is_opponent
+
+
+func is_free_cell(cell):
+	if not is_on_board(cell):
+		return false
+	return meta_board[cell] == null
+
+
+func is_on_board(cell):
+	return cell in meta_board
 
 
 func clear_free_cells():
