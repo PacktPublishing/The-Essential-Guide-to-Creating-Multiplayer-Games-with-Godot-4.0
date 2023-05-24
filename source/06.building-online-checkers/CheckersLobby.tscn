@@ -1,0 +1,129 @@
+[gd_scene load_steps=3 format=3 uid="uid://rl5p7po2gxju"]
+
+[ext_resource type="Script" path="res://05.online-quiz/QuizLobby.gd" id="1_our2u"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_oymwe"]
+font_color = Color(1, 0.2, 0.2, 1)
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_our2u")
+quiz_screen_scene = "res://06.building-online-checkers/CheckersGame.tscn"
+
+[node name="UserLineEdit" type="LineEdit" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.0
+offset_top = 72.0
+offset_right = 45.0
+offset_bottom = 110.0
+grow_horizontal = 2
+grow_vertical = 2
+placeholder_text = "username"
+alignment = 1
+
+[node name="PasswordLineEdit" type="LineEdit" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.0
+offset_top = 128.0
+offset_right = 45.0
+offset_bottom = 166.0
+grow_horizontal = 2
+grow_vertical = 2
+placeholder_text = "pasword"
+alignment = 1
+secret = true
+
+[node name="ErrorLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_oymwe")
+horizontal_alignment = 1
+
+[node name="LoginButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 70.0
+offset_top = 135.0
+offset_right = 120.0
+offset_bottom = 166.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Login"
+
+[node name="StartButton" type="Button" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -52.0
+offset_top = -130.0
+offset_right = 52.0
+offset_bottom = -99.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Start match!"
+
+[node name="LoggedPlayersColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -119.0
+offset_top = -226.0
+offset_right = 119.0
+offset_bottom = -59.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="LoggedPlayersColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 13.0
+offset_top = 15.0
+offset_right = -13.0
+offset_bottom = -15.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Players in match:
+
+"
+horizontal_alignment = 1
+
+[connection signal="text_submitted" from="UserLineEdit" to="." method="_on_UserLineEdit_text_submitted"]
+[connection signal="text_submitted" from="PasswordLineEdit" to="." method="_on_PasswordLineEdit_text_submitted"]
+[connection signal="pressed" from="LoginButton" to="." method="_on_LoginButton_pressed"]
+[connection signal="pressed" from="StartButton" to="." method="_on_StartButton_pressed"]

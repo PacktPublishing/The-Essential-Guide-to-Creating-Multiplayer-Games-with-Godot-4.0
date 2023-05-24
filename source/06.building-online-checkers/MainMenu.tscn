@@ -1,0 +1,62 @@
+[gd_scene load_steps=2 format=3 uid="uid://30ge66kg2ml2"]
+
+[ext_resource type="Script" path="res://01.setting-up-a-server/MainMenu.gd" id="1_xaifh"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xaifh")
+server_scene = "res://06.building-online-checkers/CheckersServer.tscn"
+client_scene = "res://06.building-online-checkers/CheckersLobby.tscn"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -50.0
+offset_right = 48.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Are you a..."
+
+[node name="ServerButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -84.0
+offset_top = -15.0
+offset_right = -26.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Server"
+
+[node name="ClientButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 14.0
+offset_top = -15.0
+offset_right = 67.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Client"
+
+[connection signal="pressed" from="ServerButton" to="." method="_on_server_button_pressed"]
+[connection signal="pressed" from="ClientButton" to="." method="_on_client_button_pressed"]

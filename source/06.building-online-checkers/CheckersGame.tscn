@@ -1,0 +1,80 @@
+[gd_scene load_steps=6 format=3 uid="uid://bugo6lsi34hod"]
+
+[ext_resource type="PackedScene" uid="uid://b8xc43dpux62e" path="res://06.building-online-checkers/CheckerBoard.tscn" id="1_estyv"]
+[ext_resource type="Script" path="res://06.building-online-checkers/CheckersGame.gd" id="1_rs6j7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bfts0"]
+bg_color = Color(0.215686, 0.215686, 0.215686, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y3h5c"]
+bg_color = Color(0.34902, 0.34902, 0.34902, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a1hno"]
+bg_color = Color(0.0901961, 0.0901961, 0.0901961, 1)
+
+[node name="CheckersGame" type="Node"]
+script = ExtResource("1_rs6j7")
+
+[node name="CheckerBoard" parent="." instance=ExtResource("1_estyv")]
+
+[node name="HUD" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="HUD"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.137255, 0.137255, 0.137255, 0.560784)
+
+[node name="Label" type="Label" parent="HUD"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 320.0
+offset_bottom = -272.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Black team won"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="HUD/Label"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.137255, 0.137255, 0.137255, 0.839216)
+
+[node name="RematchButton" type="Button" parent="HUD"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -64.0
+offset_top = -248.0
+offset_right = 64.0
+offset_bottom = -208.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_bfts0")
+theme_override_styles/hover = SubResource("StyleBoxFlat_y3h5c")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_a1hno")
+text = "Rematch"
+
+[connection signal="player_won" from="CheckerBoard" to="." method="_on_checker_board_player_won"]
+[connection signal="pressed" from="HUD/RematchButton" to="." method="_on_rematch_button_pressed"]

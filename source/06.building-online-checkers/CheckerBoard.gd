@@ -1,12 +1,14 @@
 extends TileMap
 
+signal player_won(winner)
+
 const DIRECTIONS_CELLS_KING = [Vector2i(-1, -1), Vector2i(1, -1), Vector2i(1, 1), Vector2i(-1, 1)]
 const DIRECTIONS_CELLS_BLACK = [Vector2i(-1, -1), Vector2i(1, -1)]
 const DIRECTIONS_CELLS_WHITE = [Vector2i(1, 1), Vector2i(-1, 1)]
 
 enum Teams{BLACK, WHITE}
 
-var current_turn = Teams.BLACK
+var current_turn = Teams.WHITE
 var meta_board = {}
 
 var selected_piece = null
@@ -17,10 +19,22 @@ var selected_piece = null
 
 
 func _ready():
+	if multiplayer.get_peers().size() > 0:
+		if is_multiplayer_authority():
+			rpc("setup_team", Teams.BLACK, multiplayer.get_peers()[0])
+			rpc("setup_team", Teams.WHITE, multiplayer.get_peers()[1])
 	create_meta_board()
 	map_pieces(black_team)
 	map_pieces(white_team)
-	enable_pieces(black_team)
+	rpc("toggle_turn")
+
+
+@rpc("authority", "call_local")
+func setup_team(team, peer):
+	if team == Teams.BLACK:
+		black_team.set_multiplayer_authority(peer)
+	else:
+		white_team.set_multiplayer_authority(peer)
 
 
 func create_meta_board():
@@ -35,19 +49,25 @@ func map_pieces(team):
 		piece.selected.connect(_on_piece_selected.bind(piece))
 
 
+@rpc("any_peer", "call_local")
 func toggle_turn():
 	clear_free_cells()
-	selected_piece.deselect()
 	var winner = get_winner()
 	if winner:
-		print(winner.name)
+		player_won.emit(winner)
 		return
 	if current_turn == Teams.BLACK:
 		current_turn = Teams.WHITE
-		enable_pieces(white_team)
+		if not multiplayer.get_peers().size() > 0:
+			enable_pieces(white_team)
+		elif white_team.get_multiplayer_authority() == multiplayer.get_unique_id():
+			enable_pieces(white_team)
 	else:
 		current_turn = Teams.BLACK
-		enable_pieces(black_team)
+		if not multiplayer.get_peers().size() > 0:
+			enable_pieces(black_team)
+		elif black_team.get_multiplayer_authority() == multiplayer.get_unique_id():
+			enable_pieces(black_team)
 
 
 func get_winner():
@@ -55,10 +75,9 @@ func get_winner():
 	disable_pieces(black_team)
 	var winner = null
 	if black_team.get_children().size() < 1:
-		winner = white_team
+		winner = "White"
 	elif white_team.get_children().size() < 1:
-		winner = black_team
-	print(white_team.get_children().size())
+		winner = "Black"
 	return winner
 
 
@@ -88,19 +107,36 @@ func disable_pieces(team):
 func move_selected_piece(target_cell):
 	var current_cell = local_to_map(selected_piece.position)
 	selected_piece.position = map_to_local(target_cell)
-	
-	# Updates meta_board
-	meta_board[current_cell] = null
-	meta_board[target_cell] = selected_piece
-	crown()
+	rpc("update_cells", current_cell, target_cell)
+	if not is_free_cell(target_cell):
+		rpc("crown", target_cell)
 
 
-func crown():
-	var selected_piece_cell = local_to_map(selected_piece.position)
-	if selected_piece.team == Teams.BLACK and selected_piece_cell.y < 1:
-		selected_piece.is_king = true
-	elif selected_piece.team == Teams.WHITE and selected_piece_cell.y > 6:
-		selected_piece.is_king = true
+@rpc("any_peer", "call_local")
+func update_cells(previous_cell, target_cell):
+	meta_board[target_cell] = meta_board[previous_cell]
+	meta_board[previous_cell] = null
+
+
+@rpc("any_peer", "call_local")
+func remove_piece(piece_cell):
+	if not is_on_board(piece_cell):
+		return
+	if is_free_cell(piece_cell):
+		return
+	var piece = meta_board[piece_cell]
+	piece.get_parent().remove_child(piece)
+	piece.free()
+	meta_board[piece_cell] = null
+
+
+@rpc("any_peer", "call_local")
+func crown(cell):
+	var piece = meta_board[cell]
+	if piece.team == Teams.BLACK and cell.y < 1:
+		piece.is_king = true
+	elif piece.team == Teams.WHITE and cell.y > 6:
+		piece.is_king = true
 
 
 func capture_pieces(target_cell):
@@ -111,12 +147,8 @@ func capture_pieces(target_cell):
 	
 	if not is_on_board(cell):
 		return
-	
-	var cell_content = meta_board[cell]
-	if cell_content:
-		cell_content.get_parent().remove_child(cell_content)
-		cell_content.free()
-		meta_board[cell] = null
+	if not is_free_cell(cell):
+		rpc("remove_piece", cell)
 		move_selected_piece(target_cell)
 		if can_capture(selected_piece):
 			target_cell = target_cell + (direction * 2)
@@ -233,4 +265,5 @@ func _on_free_cell_selected(free_cell_position):
 		capture_pieces(free_cell)
 	else:
 		move_selected_piece(free_cell)
-	toggle_turn()
+	rpc("toggle_turn")
+	selected_piece.deselect()
