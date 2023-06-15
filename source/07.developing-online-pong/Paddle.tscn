@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://cv5cm6ysvtfpg"]
+
+[ext_resource type="Script" path="res://07.developing-online-pong/Paddle.gd" id="1_rh0wy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_te6tw"]
+size = Vector2(48, 128)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_lbv26"]
+properties/0/path = NodePath("CharacterBody2D:position")
+properties/0/spawn = true
+properties/0/sync = true
+
+[node name="Paddle" type="Node2D"]
+script = ExtResource("1_rh0wy")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+shape = SubResource("RectangleShape2D_te6tw")
+debug_color = Color(0.352941, 0.482353, 1, 0.419608)
+
+[node name="Polygon2D" type="Polygon2D" parent="CharacterBody2D"]
+polygon = PackedVector2Array(-24, -64, 24, -64, 24, 64, -24, 64)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_lbv26")
+visibility_update_mode = 1

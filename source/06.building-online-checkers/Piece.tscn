@@ -5,7 +5,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lct7a"]
 size = Vector2(64, 64)
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_6np87"]
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_mku5c"]
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/sync = true
@@ -33,13 +33,13 @@ color = Color(0.160784, 1, 0.678431, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="SelectionArea2D" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SelectionArea2D"]
 shape = SubResource("RectangleShape2D_lct7a")
 debug_color = Color(0.286275, 0.498039, 1, 0.419608)
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_6np87")
+replication_config = SubResource("SceneReplicationConfig_mku5c")
 
-[connection signal="input_event" from="Area2D" to="." method="_on_area_2d_input_event"]
+[connection signal="input_event" from="SelectionArea2D" to="." method="_on_area_2d_input_event"]

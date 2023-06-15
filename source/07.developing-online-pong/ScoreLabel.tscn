@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://chgbssx1jfs8k"]
+
+[ext_resource type="Script" path="res://07.developing-online-pong/ScoreLabel.gd" id="1_re6r4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_vdvna"]
+font_size = 32
+font_color = Color(0.984314, 0.2, 0.4, 1)
+
+[node name="ScoreLabel" type="Label"]
+offset_right = 192.0
+offset_bottom = 64.0
+text = "0"
+label_settings = SubResource("LabelSettings_vdvna")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("1_re6r4")

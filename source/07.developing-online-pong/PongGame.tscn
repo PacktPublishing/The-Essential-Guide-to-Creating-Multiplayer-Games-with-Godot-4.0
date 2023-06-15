@@ -1,0 +1,162 @@
+[gd_scene load_steps=13 format=3 uid="uid://df6ad663x68on"]
+
+[ext_resource type="PackedScene" uid="uid://cv5cm6ysvtfpg" path="res://07.developing-online-pong/Paddle.tscn" id="1_l0ti1"]
+[ext_resource type="Script" path="res://07.developing-online-pong/PongGame.gd" id="1_uaa6o"]
+[ext_resource type="PackedScene" uid="uid://bw4v7rcj7m03n" path="res://07.developing-online-pong/Ball.tscn" id="4_p1cxn"]
+[ext_resource type="PackedScene" uid="uid://chgbssx1jfs8k" path="res://07.developing-online-pong/ScoreLabel.tscn" id="5_0hl66"]
+[ext_resource type="PackedScene" uid="uid://iffd26l31lsu" path="res://07.developing-online-pong/ScoreArea.tscn" id="5_jor3j"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_wsgc5"]
+normal = Vector2(0, 1)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_yjoce"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_kipo3"]
+normal = Vector2(1, 0)
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_nr80p"]
+normal = Vector2(1, 0)
+
+[sub_resource type="LabelSettings" id="LabelSettings_iiple"]
+font_size = 50
+
+[sub_resource type="GDScript" id="GDScript_qkd2y"]
+script/source = "extends Label
+
+
+func _ready():
+	if multiplayer.get_peers().size() > 0:
+		visible = is_multiplayer_authority()
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_nix8t"]
+font_size = 50
+font_color = Color(1, 0.196078, 0.470588, 1)
+
+[node name="PongGame" type="Node"]
+script = ExtResource("1_uaa6o")
+goal_score = 10
+
+[node name="Paddle" parent="." instance=ExtResource("1_l0ti1")]
+position = Vector2(152, 384)
+
+[node name="Paddle2" parent="." instance=ExtResource("1_l0ti1")]
+position = Vector2(1128, 384)
+
+[node name="Ball" parent="." instance=ExtResource("4_p1cxn")]
+position = Vector2(640, 384)
+
+[node name="Ceiling" type="StaticBody2D" parent="."]
+position = Vector2(640, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling"]
+shape = SubResource("WorldBoundaryShape2D_wsgc5")
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(640, 720)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+shape = SubResource("WorldBoundaryShape2D_yjoce")
+
+[node name="ScoreArea" parent="." instance=ExtResource("5_jor3j")]
+position = Vector2(0, 384)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScoreArea"]
+shape = SubResource("WorldBoundaryShape2D_kipo3")
+
+[node name="ScoreArea2" parent="." instance=ExtResource("5_jor3j")]
+position = Vector2(1280, 384)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScoreArea2"]
+rotation = -3.14159
+shape = SubResource("WorldBoundaryShape2D_nr80p")
+
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="Background"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0705882, 0.0705882, 0.0705882, 1)
+
+[node name="Interface" type="CanvasLayer" parent="."]
+
+[node name="HUD" type="Control" parent="Interface"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScoreLabel" parent="Interface/HUD" instance=ExtResource("5_0hl66")]
+layout_mode = 0
+offset_left = 320.0
+offset_right = 512.0
+
+[node name="ScoreLabel2" parent="Interface/HUD" instance=ExtResource("5_0hl66")]
+layout_mode = 0
+offset_left = 704.0
+offset_right = 896.0
+
+[node name="Label" type="Label" parent="Interface/HUD"]
+visible = false
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "I'm server"
+label_settings = SubResource("LabelSettings_iiple")
+script = SubResource("GDScript_qkd2y")
+
+[node name="WinnerDisplay" type="ColorRect" parent="Interface"]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0392157, 0.0392157, 0.0392157, 0.65098)
+
+[node name="Label" type="Label" parent="Interface/WinnerDisplay"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -34.5
+offset_bottom = 34.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Player One won!!"
+label_settings = SubResource("LabelSettings_nix8t")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="Interface/WinnerDisplay"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -38.5
+offset_top = -200.0
+offset_right = 38.5
+offset_bottom = -169.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Rematch"
+
+[connection signal="scored" from="ScoreArea" to="." method="_on_score_area_scored"]
+[connection signal="scored" from="ScoreArea" to="Interface/HUD/ScoreLabel2" method="update_score"]
+[connection signal="scored" from="ScoreArea2" to="." method="_on_score_area_scored"]
+[connection signal="scored" from="ScoreArea2" to="Interface/HUD/ScoreLabel" method="update_score"]
+[connection signal="pressed" from="Interface/WinnerDisplay/Button" to="." method="_on_button_pressed"]

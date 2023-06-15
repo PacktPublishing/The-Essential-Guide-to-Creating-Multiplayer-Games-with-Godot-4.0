@@ -17,6 +17,79 @@ script = ExtResource("1_rs6j7")
 
 [node name="CheckerBoard" parent="." instance=ExtResource("1_estyv")]
 
+[node name="Piece" parent="CheckerBoard/BlackTeam" index="0"]
+position = Vector2(160, 160)
+is_king = true
+
+[node name="Piece2" parent="CheckerBoard/BlackTeam" index="1"]
+visible = false
+
+[node name="Piece3" parent="CheckerBoard/BlackTeam" index="2"]
+visible = false
+
+[node name="Piece4" parent="CheckerBoard/BlackTeam" index="3"]
+visible = false
+
+[node name="Piece5" parent="CheckerBoard/BlackTeam" index="4"]
+visible = false
+
+[node name="Piece6" parent="CheckerBoard/BlackTeam" index="5"]
+visible = false
+
+[node name="Piece7" parent="CheckerBoard/BlackTeam" index="6"]
+visible = false
+
+[node name="Piece8" parent="CheckerBoard/BlackTeam" index="7"]
+visible = false
+
+[node name="Piece9" parent="CheckerBoard/BlackTeam" index="8"]
+visible = false
+
+[node name="Piece10" parent="CheckerBoard/BlackTeam" index="9"]
+visible = false
+
+[node name="Piece11" parent="CheckerBoard/BlackTeam" index="10"]
+visible = false
+
+[node name="Piece12" parent="CheckerBoard/BlackTeam" index="11"]
+visible = false
+
+[node name="Piece" parent="CheckerBoard/WhiteTeam" index="0"]
+visible = false
+
+[node name="Piece2" parent="CheckerBoard/WhiteTeam" index="1"]
+visible = false
+
+[node name="Piece3" parent="CheckerBoard/WhiteTeam" index="2"]
+visible = false
+
+[node name="Piece4" parent="CheckerBoard/WhiteTeam" index="3"]
+visible = false
+
+[node name="Piece5" parent="CheckerBoard/WhiteTeam" index="4"]
+visible = false
+
+[node name="Piece6" parent="CheckerBoard/WhiteTeam" index="5"]
+visible = false
+
+[node name="Piece7" parent="CheckerBoard/WhiteTeam" index="6"]
+visible = false
+
+[node name="Piece8" parent="CheckerBoard/WhiteTeam" index="7"]
+visible = false
+
+[node name="Piece9" parent="CheckerBoard/WhiteTeam" index="8"]
+visible = false
+
+[node name="Piece10" parent="CheckerBoard/WhiteTeam" index="9"]
+visible = false
+
+[node name="Piece11" parent="CheckerBoard/WhiteTeam" index="10"]
+visible = false
+
+[node name="Piece12" parent="CheckerBoard/WhiteTeam" index="11"]
+visible = false
+
 [node name="HUD" type="Control" parent="."]
 visible = false
 layout_mode = 3
@@ -78,3 +151,5 @@ text = "Rematch"
 
 [connection signal="player_won" from="CheckerBoard" to="." method="_on_checker_board_player_won"]
 [connection signal="pressed" from="HUD/RematchButton" to="." method="_on_rematch_button_pressed"]
+
+[editable path="CheckerBoard"]

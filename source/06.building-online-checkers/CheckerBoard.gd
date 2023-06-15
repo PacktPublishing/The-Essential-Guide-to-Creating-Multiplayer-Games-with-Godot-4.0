@@ -30,11 +30,11 @@ func _ready():
 
 
 @rpc("authority", "call_local")
-func setup_team(team, peer):
+func setup_team(team, peer_id):
 	if team == Teams.BLACK:
-		black_team.set_multiplayer_authority(peer)
+		black_team.set_multiplayer_authority(peer_id)
 	else:
-		white_team.set_multiplayer_authority(peer)
+		white_team.set_multiplayer_authority(peer_id)
 
 
 func create_meta_board():
@@ -52,6 +52,8 @@ func map_pieces(team):
 @rpc("any_peer", "call_local")
 func toggle_turn():
 	clear_free_cells()
+	disable_pieces(white_team)
+	disable_pieces(black_team)
 	var winner = get_winner()
 	if winner:
 		player_won.emit(winner)
@@ -71,8 +73,6 @@ func toggle_turn():
 
 
 func get_winner():
-	disable_pieces(white_team)
-	disable_pieces(black_team)
 	var winner = null
 	if black_team.get_children().size() < 1:
 		winner = "White"

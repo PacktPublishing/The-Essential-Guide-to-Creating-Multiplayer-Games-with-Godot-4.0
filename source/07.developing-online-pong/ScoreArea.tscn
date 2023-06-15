@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://iffd26l31lsu"]
+
+[ext_resource type="Script" path="res://07.developing-online-pong/ScoreArea.gd" id="1_luvxe"]
+
+[node name="ScoreArea" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_luvxe")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
