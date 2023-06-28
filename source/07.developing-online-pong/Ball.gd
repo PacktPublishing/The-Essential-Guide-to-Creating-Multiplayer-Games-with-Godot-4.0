@@ -7,10 +7,8 @@ extends Node2D
 
 
 func _ready():
-	if multiplayer.get_peers().size() > 0:
-		if not is_multiplayer_authority():
-			set_physics_process(false)
-
+	if not is_multiplayer_authority():
+		set_physics_process(false)
 
 
 func move():

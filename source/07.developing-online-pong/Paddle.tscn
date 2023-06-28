@@ -5,7 +5,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_te6tw"]
 size = Vector2(48, 128)
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_lbv26"]
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_l68km"]
 properties/0/path = NodePath("CharacterBody2D:position")
 properties/0/spawn = true
 properties/0/sync = true
@@ -23,5 +23,5 @@ debug_color = Color(0.352941, 0.482353, 1, 0.419608)
 polygon = PackedVector2Array(-24, -64, 24, -64, 24, 64, -24, 64)
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_lbv26")
+replication_config = SubResource("SceneReplicationConfig_l68km")
 visibility_update_mode = 1

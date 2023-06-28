@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://c21v2tcsnb6gs"]
+
+[ext_resource type="Script" path="res://08.designing-online-platformer/Assets/Recipes/BasicMovingCharacter/BasicMovingCharacter2D.gd" id="1_sa0bk"]
+
+[node name="BasicMovingCharacter2D" type="CharacterBody2D"]
+collision_layer = 0
+floor_constant_speed = true
+floor_snap_length = 64.0
+script = ExtResource("1_sa0bk")

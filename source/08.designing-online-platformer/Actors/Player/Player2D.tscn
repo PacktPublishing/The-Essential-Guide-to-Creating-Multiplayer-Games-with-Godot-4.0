@@ -1,0 +1,90 @@
+[gd_scene load_steps=8 format=3 uid="uid://b6csjxqmlfpn8"]
+
+[ext_resource type="PackedScene" uid="uid://c76mag0uwv68v" path="res://08.designing-online-platformer/Assets/Recipes/BasicMovingCharacter/BasicMovingPlayer2D.tscn" id="1_4amq3"]
+[ext_resource type="Script" path="res://08.designing-online-platformer/Actors/Player/Player2D.gd" id="2_w5e7r"]
+[ext_resource type="SpriteFrames" uid="uid://q6p1hal4oxix" path="res://08.designing-online-platformer/Assets/Kings and Pigs/02-King Pig/KingPigSpriteFrames.tres" id="3_tjmeh"]
+[ext_resource type="SpriteFrames" uid="uid://peife7qdf5bf" path="res://08.designing-online-platformer/Assets/Kings and Pigs/13-Dialogue Boxes/InterrogationSpriteFrames.tres" id="4_lltv7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_eokwi"]
+size = Vector2(64, 80)
+
+[sub_resource type="GDScript" id="GDScript_l8x1n"]
+script/source = "extends AnimatedSprite2D
+
+
+func _input(event):
+	if event.is_action(\"move_down\"):
+		if event is InputEventJoypadMotion:
+			if event.axis_value <= 0.5:
+				return
+		if event.is_pressed():
+			play(\"in\")
+		else:
+			play(\"out\")
+"
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_0efso"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/1/path = NodePath("Sprites/AnimatedSprite2D:animation")
+properties/1/spawn = true
+properties/1/sync = true
+properties/2/path = NodePath("Sprites/AnimatedSprite2D:frame")
+properties/2/spawn = true
+properties/2/sync = true
+properties/3/path = NodePath("Sprites:scale")
+properties/3/spawn = true
+properties/3/sync = true
+properties/4/path = NodePath("Sprites/InterrogationAnimatedSprite2D:animation")
+properties/4/spawn = true
+properties/4/sync = true
+properties/5/path = NodePath("Sprites/InterrogationAnimatedSprite2D:frame")
+properties/5/spawn = true
+properties/5/sync = true
+
+[node name="PlayerCharacter2D" instance=ExtResource("1_4amq3")]
+collision_mask = 3
+platform_on_leave = 2
+platform_floor_layers = 4294901763
+script = ExtResource("2_w5e7r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="0"]
+position = Vector2(0, -40)
+shape = SubResource("RectangleShape2D_eokwi")
+
+[node name="InteractionArea2D" type="Area2D" parent="." index="1"]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea2D" index="0"]
+position = Vector2(0, -40)
+shape = SubResource("RectangleShape2D_eokwi")
+debug_color = Color(0.647059, 0.345098, 0.976471, 0.419608)
+
+[node name="GrabbingRemoteTransform2D" type="RemoteTransform2D" parent="InteractionArea2D" index="1"]
+position = Vector2(0, -82)
+update_rotation = false
+update_scale = false
+
+[node name="Sprites" type="Node2D" parent="." index="2"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Sprites" index="0"]
+position = Vector2(0, -56)
+scale = Vector2(4, 4)
+sprite_frames = ExtResource("3_tjmeh")
+animation = &"idle"
+flip_h = true
+
+[node name="InterrogationAnimatedSprite2D" type="AnimatedSprite2D" parent="Sprites" index="1"]
+position = Vector2(0, -112)
+scale = Vector2(4, 4)
+sprite_frames = ExtResource("4_lltv7")
+animation = &"in"
+script = SubResource("GDScript_l8x1n")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." index="3"]
+replication_config = SubResource("SceneReplicationConfig_0efso")
+visibility_update_mode = 1
+
+[connection signal="animation_finished" from="Sprites/AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

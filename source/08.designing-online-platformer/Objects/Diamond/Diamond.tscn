@@ -1,0 +1,341 @@
+[gd_scene load_steps=34 format=3 uid="uid://c80fci1r5e5lj"]
+
+[ext_resource type="Script" path="res://08.designing-online-platformer/Objects/Diamond/Diamond.gd" id="1_b3oxm"]
+[ext_resource type="Texture2D" uid="uid://h0o7dw73opgc" path="res://08.designing-online-platformer/Assets/Kings and Pigs/12-Live and Coins/Big Diamond Idle (18x14).png" id="1_fumts"]
+[ext_resource type="PackedScene" uid="uid://bqpj06nn7ioem" path="res://08.designing-online-platformer/Assets/Recipes/InteractiveArea/InteractiveArea2D.tscn" id="2_nd4ue"]
+[ext_resource type="Texture2D" uid="uid://e8bvey5srkuk" path="res://08.designing-online-platformer/Assets/Kings and Pigs/13-Dialogue Boxes/!!! In (24x8).png" id="4_gqew3"]
+[ext_resource type="Texture2D" uid="uid://dm3qo6rlj8bht" path="res://08.designing-online-platformer/Assets/Kings and Pigs/13-Dialogue Boxes/!!! Out (24x8).png" id="5_5l3uq"]
+[ext_resource type="FontFile" uid="uid://fbxdyn186ebu" path="res://08.designing-online-platformer/Interface/Fonts/Kenney Thick.ttf" id="6_qyr8i"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hjdbl"]
+atlas = ExtResource("1_fumts")
+region = Rect2(0, 0, 18, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4act5"]
+atlas = ExtResource("1_fumts")
+region = Rect2(18, 0, 18, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7wwcd"]
+atlas = ExtResource("1_fumts")
+region = Rect2(36, 0, 18, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nng5k"]
+atlas = ExtResource("1_fumts")
+region = Rect2(54, 0, 18, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pdxw7"]
+atlas = ExtResource("1_fumts")
+region = Rect2(72, 0, 18, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g2ko6"]
+atlas = ExtResource("1_fumts")
+region = Rect2(90, 0, 18, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1xi5n"]
+atlas = ExtResource("1_fumts")
+region = Rect2(108, 0, 18, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_751ms"]
+atlas = ExtResource("1_fumts")
+region = Rect2(126, 0, 18, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ng2r7"]
+atlas = ExtResource("1_fumts")
+region = Rect2(144, 0, 18, 14)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0h40r"]
+atlas = ExtResource("1_fumts")
+region = Rect2(162, 0, 18, 14)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0sr8a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hjdbl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4act5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7wwcd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nng5k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pdxw7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g2ko6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1xi5n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_751ms")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ng2r7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0h40r")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v1kg7"]
+radius = 24.0
+
+[sub_resource type="Animation" id="Animation_nayas"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Interface/Label:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Interface/Label:visible_characters")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Interface/Label:visible_ratio")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_y6tly"]
+resource_name = "display_text"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Interface/Label:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_c0wa7"]
+resource_name = "pop_label"
+length = 0.15
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Interface/Label:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.15),
+"transitions": PackedFloat32Array(0.5, 1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(1.2, 1.2), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Interface/Label:visible_characters")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sqp7n"]
+_data = {
+"RESET": SubResource("Animation_nayas"),
+"display_text": SubResource("Animation_y6tly"),
+"pop_label": SubResource("Animation_c0wa7")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ptkfb"]
+atlas = ExtResource("4_gqew3")
+region = Rect2(0, 0, 34, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l2num"]
+atlas = ExtResource("4_gqew3")
+region = Rect2(34, 0, 34, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_goufi"]
+atlas = ExtResource("4_gqew3")
+region = Rect2(68, 0, 34, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_07xow"]
+atlas = ExtResource("5_5l3uq")
+region = Rect2(0, 0, 34, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_osf2e"]
+atlas = ExtResource("5_5l3uq")
+region = Rect2(34, 0, 34, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dltqf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ptkfb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l2num")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_goufi")
+}],
+"loop": false,
+"name": &"in",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_07xow")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_osf2e")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"out",
+"speed": 10.0
+}]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1ycmf"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.156863, 0.156863, 0.207843, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_xvc4p"]
+font = ExtResource("6_qyr8i")
+font_size = 12
+
+[sub_resource type="Animation" id="Animation_kdiwe"]
+resource_name = "00.diamond"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Interface/Label:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["It looks precious, gonna take that one with me"]
+}
+
+[sub_resource type="Animation" id="Animation_40e8k"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Interface/Label:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["It looks precious, gonna take that one with me"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mjkx7"]
+_data = {
+"00.diamond": SubResource("Animation_kdiwe"),
+"RESET": SubResource("Animation_40e8k")
+}
+
+[node name="Diamond" type="RigidBody2D"]
+collision_layer = 0
+script = ExtResource("1_b3oxm")
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+remote_path = NodePath("../Interface")
+update_rotation = false
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-8, 0)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_0sr8a")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_v1kg7")
+
+[node name="InteractiveArea2D" parent="." instance=ExtResource("2_nd4ue")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractiveArea2D"]
+shape = SubResource("CircleShape2D_v1kg7")
+debug_color = Color(0.678431, 0.301961, 1, 0.419608)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_sqp7n")
+}
+
+[node name="Interface" type="Node2D" parent="."]
+top_level = true
+
+[node name="ExclamationBalloon" type="AnimatedSprite2D" parent="Interface"]
+position = Vector2(0, -100)
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_dltqf")
+animation = &"out"
+frame = 2
+
+[node name="Label" type="Label" parent="Interface"]
+offset_left = -168.0
+offset_top = -168.0
+offset_right = 168.0
+offset_bottom = -64.0
+scale = Vector2(1e-05, 1e-05)
+pivot_offset = Vector2(168, 104)
+theme_override_styles/normal = SubResource("StyleBoxFlat_1ycmf")
+text = "It looks precious, gonna take that one with me"
+label_settings = SubResource("LabelSettings_xvc4p")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Interface/Label"]
+root_node = NodePath("../../..")
+libraries = {
+"": SubResource("AnimationLibrary_mjkx7")
+}
+
+[connection signal="interacted" from="InteractiveArea2D" to="." method="_on_interactive_area_2d_interacted"]
+[connection signal="interaction_available" from="InteractiveArea2D" to="." method="_on_interactive_area_2d_interaction_available"]
+[connection signal="interaction_unavailable" from="InteractiveArea2D" to="." method="_on_interactive_area_2d_interaction_unavailable"]

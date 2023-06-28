@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://cqgdeb0m4nj6d"]
+
+[ext_resource type="Script" path="res://08.designing-online-platformer/Objects/Crate/Crate.gd" id="1_c81nv"]
+[ext_resource type="Texture2D" uid="uid://dln58hdvjoj6q" path="res://08.designing-online-platformer/Assets/Kings and Pigs/08-Box/Idle.png" id="2_566er"]
+[ext_resource type="PackedScene" uid="uid://bqpj06nn7ioem" path="res://08.designing-online-platformer/Assets/Recipes/InteractiveArea/InteractiveArea2D.tscn" id="3_q23of"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7ovr7"]
+size = Vector2(96, 64)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_mho0g"]
+properties/0/path = NodePath("CharacterBody2D:position")
+properties/0/spawn = true
+properties/0/sync = true
+
+[node name="Crate" type="Node2D"]
+position = Vector2(1664, 2528)
+script = ExtResource("1_c81nv")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(0, 32)
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+position = Vector2(0, -32)
+scale = Vector2(4, 4)
+texture = ExtResource("2_566er")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(0, -32)
+shape = SubResource("RectangleShape2D_7ovr7")
+
+[node name="InteractiveArea2D" parent="CharacterBody2D" instance=ExtResource("3_q23of")]
+position = Vector2(0, -32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/InteractiveArea2D"]
+position = Vector2(-8, 0)
+shape = SubResource("RectangleShape2D_7ovr7")
+debug_color = Color(0.756863, 0.2, 0.984314, 0.419608)
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_mho0g")
+visibility_update_mode = 1
+
+[connection signal="area_entered" from="CharacterBody2D/InteractiveArea2D" to="." method="_on_interactive_area_2d_area_entered"]
+[connection signal="interacted" from="CharacterBody2D/InteractiveArea2D" to="." method="_on_interactive_area_2d_interacted"]

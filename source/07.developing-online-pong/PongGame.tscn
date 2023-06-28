@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://df6ad663x68on"]
+[gd_scene load_steps=11 format=3 uid="uid://df6ad663x68on"]
 
 [ext_resource type="PackedScene" uid="uid://cv5cm6ysvtfpg" path="res://07.developing-online-pong/Paddle.tscn" id="1_l0ti1"]
 [ext_resource type="Script" path="res://07.developing-online-pong/PongGame.gd" id="1_uaa6o"]
@@ -16,18 +16,6 @@ normal = Vector2(1, 0)
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_nr80p"]
 normal = Vector2(1, 0)
-
-[sub_resource type="LabelSettings" id="LabelSettings_iiple"]
-font_size = 50
-
-[sub_resource type="GDScript" id="GDScript_qkd2y"]
-script/source = "extends Label
-
-
-func _ready():
-	if multiplayer.get_peers().size() > 0:
-		visible = is_multiplayer_authority()
-"
 
 [sub_resource type="LabelSettings" id="LabelSettings_nix8t"]
 font_size = 50
@@ -102,22 +90,7 @@ layout_mode = 0
 offset_left = 704.0
 offset_right = 896.0
 
-[node name="Label" type="Label" parent="Interface/HUD"]
-visible = false
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -23.0
-grow_horizontal = 2
-grow_vertical = 0
-text = "I'm server"
-label_settings = SubResource("LabelSettings_iiple")
-script = SubResource("GDScript_qkd2y")
-
 [node name="WinnerDisplay" type="ColorRect" parent="Interface"]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

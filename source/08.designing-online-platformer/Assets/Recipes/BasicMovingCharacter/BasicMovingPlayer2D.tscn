@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://c76mag0uwv68v"]
+
+[ext_resource type="PackedScene" uid="uid://c21v2tcsnb6gs" path="res://08.designing-online-platformer/Assets/Recipes/BasicMovingCharacter/BasicMovingCharacter2D.tscn" id="1_8uds0"]
+[ext_resource type="Script" path="res://08.designing-online-platformer/Assets/Recipes/PassThroughCharacter/PassThroughPlayer2D.gd" id="2_ahoxp"]
+
+[node name="PlayerCharacter2D" instance=ExtResource("1_8uds0")]
+script = ExtResource("2_ahoxp")
+move_left_action = "move_left"
+move_right_action = "move_right"
+move_down_action = "move_down"
+jump_action = "jump"
+pass_through_layers = 2

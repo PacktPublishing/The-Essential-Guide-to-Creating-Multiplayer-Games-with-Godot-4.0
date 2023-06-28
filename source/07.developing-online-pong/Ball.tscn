@@ -16,7 +16,7 @@ func _draw():
 	draw_circle(Vector2.ZERO, shape.radius, color)
 "
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_2b17v"]
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_lpfcv"]
 properties/0/path = NodePath("CharacterBody2D:position")
 properties/0/spawn = true
 properties/0/sync = true
@@ -32,5 +32,5 @@ shape = SubResource("CircleShape2D_netic")
 script = SubResource("GDScript_vl34c")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_2b17v")
+replication_config = SubResource("SceneReplicationConfig_lpfcv")
 visibility_update_mode = 1
