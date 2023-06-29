@@ -1,9 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cikne0atpr57y"]
+[gd_scene load_steps=5 format=3 uid="uid://cikne0atpr57y"]
 
 [ext_resource type="TileSet" uid="uid://c0ikw2a5usjmh" path="res://08.designing-online-platformer/Areas/Tileset.tres" id="1_p4de5"]
-[ext_resource type="Script" path="res://08.designing-online-platformer/Levels/Players.gd" id="2_x5yd5"]
+[ext_resource type="Script" path="res://08.designing-online-platformer/Levels/PlayerSpawner.gd" id="2_oj518"]
 [ext_resource type="PackedScene" uid="uid://cqgdeb0m4nj6d" path="res://08.designing-online-platformer/Objects/Crate/Crate.tscn" id="3_hgjxh"]
-[ext_resource type="PackedScene" uid="uid://c80fci1r5e5lj" path="res://08.designing-online-platformer/Objects/Diamond/Diamond.tscn" id="4_rb6kg"]
 
 [sub_resource type="GDScript" id="GDScript_2oj1s"]
 script/source = "extends Label
@@ -31,10 +30,10 @@ layer_1/y_sort_origin = 0
 layer_1/z_index = 0
 layer_1/tile_data = PackedInt32Array(917514, 131074, 2, 917515, 196610, 2, 917516, 262146, 2, 786448, 131074, 2, 786449, 262146, 2)
 
-[node name="Players" type="Marker2D" parent="."]
+[node name="PlayerSpawner" type="Marker2D" parent="."]
 position = Vector2(1440, 2384)
 gizmo_extents = 32.0
-script = ExtResource("2_x5yd5")
+script = ExtResource("2_oj518")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(1655, 2321)
@@ -53,14 +52,6 @@ script = SubResource("GDScript_2oj1s")
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://08.designing-online-platformer/Actors/Player/Player2D.tscn")
-spawn_path = NodePath("../Players")
+spawn_path = NodePath("../PlayerSpawner")
 
-[node name="Diamonds" type="Node2D" parent="."]
-
-[node name="Diamond" parent="Diamonds" instance=ExtResource("4_rb6kg")]
-position = Vector2(1216, 2232)
-
-[node name="Diamond2" parent="Diamonds" instance=ExtResource("4_rb6kg")]
-position = Vector2(1000, 2120)
-
-[connection signal="spawned" from="MultiplayerSpawner" to="Players" method="_on_multiplayer_spawner_spawned"]
+[connection signal="spawned" from="MultiplayerSpawner" to="PlayerSpawner" method="_on_multiplayer_spawner_spawned"]

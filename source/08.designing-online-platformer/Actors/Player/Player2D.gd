@@ -17,9 +17,17 @@ func setup_multiplayer(player_id):
 
 func setup_controller(index):
 	for action in InputMap.get_actions():
+		var new_action = action + "%s" % index
+		InputMap.add_action(new_action)
 		for event in InputMap.action_get_events(action):
-			if event is InputEventJoypadButton or event is InputEventJoypadMotion:
-				event.device = index
+			var new_event = event.duplicate()
+			new_event.device = index
+			InputMap.action_add_event(new_action, event)
+		for property in get_property_list():
+			if not typeof(get(property.name)) == TYPE_STRING:
+				continue
+			if get(property.name) == action:
+				set(property.name, new_action)
 
 
 func _physics_process(delta):

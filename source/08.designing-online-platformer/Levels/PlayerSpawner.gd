@@ -6,24 +6,24 @@ extends Marker2D
 func _ready():
 	await(get_tree().physics_frame)
 	if multiplayer.get_peers().size() < 1:
+		if Input.get_connected_joypads().size() < 1:
+			var player = players_scene.instantiate()
+			add_child(player)
+			return
 		for i in Input.get_connected_joypads():
-			var player = add_player()
+			var player = players_scene.instantiate()
+			add_child(player)
 			player.setup_controller(i)
 		return
 	if is_multiplayer_authority():
 		for i in range(0, multiplayer.get_peers().size()):
-			var player = add_player()
+			var player = players_scene.instantiate()
 			var player_id = multiplayer.get_peers()[i]
 			player.name = str(player_id)
+			add_child(player)
+			await(get_tree().create_timer(0.1).timeout)
 			player.rpc("setup_multiplayer", player_id)
 
 
-func add_player():
-	var player = players_scene.instantiate()
-	add_child(player)
-	return player
-
-
 func _on_multiplayer_spawner_spawned(node):
-	await(get_tree().physics_frame)
-	node.rpc("setup_multiplayer", node.name)
+	node.rpc("setup_multiplayer", int(str(node.name)))
