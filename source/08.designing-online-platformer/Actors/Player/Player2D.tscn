@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://b6csjxqmlfpn8"]
+[gd_scene load_steps=6 format=3 uid="uid://b6csjxqmlfpn8"]
 
 [ext_resource type="PackedScene" uid="uid://c76mag0uwv68v" path="res://08.designing-online-platformer/Assets/Recipes/BasicMovingCharacter/BasicMovingPlayer2D.tscn" id="1_4amq3"]
 [ext_resource type="Script" path="res://08.designing-online-platformer/Actors/Player/Player2D.gd" id="2_w5e7r"]
@@ -6,6 +6,20 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eokwi"]
 size = Vector2(64, 80)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_0efso"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/1/path = NodePath("Sprites/AnimatedSprite2D:animation")
+properties/1/spawn = true
+properties/1/sync = true
+properties/2/path = NodePath("Sprites/AnimatedSprite2D:frame")
+properties/2/spawn = true
+properties/2/sync = true
+properties/3/path = NodePath("Sprites:scale")
+properties/3/spawn = true
+properties/3/sync = true
 
 [node name="PlayerCharacter2D" instance=ExtResource("1_4amq3")]
 collision_mask = 3
@@ -39,5 +53,9 @@ scale = Vector2(4, 4)
 sprite_frames = ExtResource("3_tjmeh")
 animation = &"idle"
 flip_h = true
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." index="3"]
+replication_config = SubResource("SceneReplicationConfig_0efso")
+visibility_update_mode = 1
 
 [connection signal="animation_finished" from="Sprites/AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
