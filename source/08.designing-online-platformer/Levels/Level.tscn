@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cikne0atpr57y"]
 
 [ext_resource type="TileSet" uid="uid://c0ikw2a5usjmh" path="res://08.designing-online-platformer/Areas/Tileset.tres" id="1_p4de5"]
-[ext_resource type="Script" path="res://08.designing-online-platformer/Levels/PlayerSpawner.gd" id="2_oj518"]
+[ext_resource type="PackedScene" uid="uid://cdne87na60ni0" path="res://08.designing-online-platformer/Levels/PlayerSpawner.tscn" id="2_7b6oi"]
 [ext_resource type="PackedScene" uid="uid://cqgdeb0m4nj6d" path="res://08.designing-online-platformer/Objects/Crate/Crate.tscn" id="3_hgjxh"]
 
 [sub_resource type="GDScript" id="GDScript_2oj1s"]
@@ -30,17 +30,15 @@ layer_1/y_sort_origin = 0
 layer_1/z_index = 0
 layer_1/tile_data = PackedInt32Array(917514, 131074, 2, 917515, 196610, 2, 917516, 262146, 2, 786448, 131074, 2, 786449, 262146, 2)
 
-[node name="PlayerSpawner" type="Marker2D" parent="."]
-position = Vector2(1440, 2384)
-gizmo_extents = 32.0
-script = ExtResource("2_oj518")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(1655, 2321)
+[node name="PlayerSpawner" parent="." instance=ExtResource("2_7b6oi")]
 
 [node name="Crates" type="Node2D" parent="."]
 
 [node name="Crate" parent="Crates" instance=ExtResource("3_hgjxh")]
+position = Vector2(1664, 2560)
+
+[node name="Crate2" parent="Crates" instance=ExtResource("3_hgjxh")]
+position = Vector2(1016, 2176)
 
 [node name="Label" type="Label" parent="."]
 offset_left = 1504.0
@@ -50,8 +48,5 @@ offset_bottom = 2303.0
 text = "I'm server"
 script = SubResource("GDScript_2oj1s")
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://08.designing-online-platformer/Actors/Player/Player2D.tscn")
-spawn_path = NodePath("../PlayerSpawner")
-
-[connection signal="spawned" from="MultiplayerSpawner" to="PlayerSpawner" method="_on_multiplayer_spawner_spawned"]
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(1536, 2304)

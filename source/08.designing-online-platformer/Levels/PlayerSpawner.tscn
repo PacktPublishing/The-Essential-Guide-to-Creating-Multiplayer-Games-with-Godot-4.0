@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdne87na60ni0"]
+
+[ext_resource type="Script" path="res://08.designing-online-platformer/Levels/PlayerSpawner.gd" id="1_0jxpk"]
+
+[node name="PlayerSpawner" type="Marker2D"]
+position = Vector2(1440, 2384)
+gizmo_extents = 32.0
+script = ExtResource("1_0jxpk")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://08.designing-online-platformer/Actors/Player/Player2D.tscn")
+spawn_path = NodePath("..")
