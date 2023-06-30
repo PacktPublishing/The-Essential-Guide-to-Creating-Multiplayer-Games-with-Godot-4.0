@@ -4,6 +4,7 @@ signal died
 
 @onready var animated_sprites = $Sprites/AnimatedSprite2D
 @onready var sprites = $Sprites
+@onready var label = $Label
 
 var fall_speed = 0.0
 
@@ -14,6 +15,7 @@ func setup_multiplayer(player_id):
 	var is_player = str(player_id) == str(name)
 	set_physics_process(is_player)
 	set_process_unhandled_input(is_player)
+	label.text = "P%s" % get_index()
 
 
 func setup_controller(index):
