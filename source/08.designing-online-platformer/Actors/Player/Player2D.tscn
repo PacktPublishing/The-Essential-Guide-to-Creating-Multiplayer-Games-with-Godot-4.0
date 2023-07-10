@@ -64,6 +64,5 @@ offset_top = -104.0
 offset_right = 32.0
 offset_bottom = -81.0
 horizontal_alignment = 1
-vertical_alignment = 1
 
 [connection signal="animation_finished" from="Sprites/AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

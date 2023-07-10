@@ -4,7 +4,7 @@ extends Marker2D
 
 
 func _ready():
-	await(get_tree().physics_frame)
+	await(get_tree().create_timer(0.1).timeout)
 	if multiplayer.get_peers().size() < 1:
 		if Input.get_connected_joypads().size() < 1:
 			var player = players_scene.instantiate()

@@ -31,6 +31,7 @@ layer_1/z_index = 0
 layer_1/tile_data = PackedInt32Array(917514, 131074, 2, 917515, 196610, 2, 917516, 262146, 2, 786448, 131074, 2, 786449, 262146, 2)
 
 [node name="PlayerSpawner" parent="." instance=ExtResource("2_7b6oi")]
+z_index = 1
 
 [node name="Crates" type="Node2D" parent="."]
 

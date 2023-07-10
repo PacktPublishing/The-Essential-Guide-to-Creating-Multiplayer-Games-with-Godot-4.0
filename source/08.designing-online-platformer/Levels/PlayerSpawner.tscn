@@ -10,3 +10,5 @@ script = ExtResource("1_0jxpk")
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://08.designing-online-platformer/Actors/Player/Player2D.tscn")
 spawn_path = NodePath("..")
+
+[connection signal="spawned" from="MultiplayerSpawner" to="." method="_on_multiplayer_spawner_spawned"]

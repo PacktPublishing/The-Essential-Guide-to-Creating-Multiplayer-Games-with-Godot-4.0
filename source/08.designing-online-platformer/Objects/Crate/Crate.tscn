@@ -10,7 +10,7 @@ size = Vector2(80, 64)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7ovr7"]
 size = Vector2(96, 64)
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_mho0g"]
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_25x3e"]
 properties/0/path = NodePath("CharacterBody2D:position")
 properties/0/spawn = true
 properties/0/sync = true
@@ -37,7 +37,7 @@ shape = SubResource("RectangleShape2D_7ovr7")
 debug_color = Color(0.756863, 0.2, 0.984314, 0.419608)
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_mho0g")
+replication_config = SubResource("SceneReplicationConfig_25x3e")
 visibility_update_mode = 1
 
 [connection signal="area_entered" from="CharacterBody2D/InteractiveArea2D" to="." method="_on_interactive_area_2d_area_entered"]
