@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cjuj16vhaypvl"]
+
+[ext_resource type="Script" path="res://09.prototyping-space-adventure/Objects/Weapon/BulletSpawner2D.gd" id="1_c40lq"]
+
+[node name="BulletSpawner2D" type="Marker2D"]
+script = ExtResource("1_c40lq")

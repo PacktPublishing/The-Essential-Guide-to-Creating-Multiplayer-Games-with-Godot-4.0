@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5oqsdfa1o7xe"]
+
+[ext_resource type="Script" path="res://09.prototyping-space-adventure/Objects/Spaceship/Spaceship.gd" id="1_cvu2h"]
+
+[node name="Spaceship" type="RigidBody2D"]
+script = ExtResource("1_cvu2h")

@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://vdftbdwhn531"]
+
+[ext_resource type="Script" path="res://09.prototyping-space-adventure/Recipes/Hazard/HitArea2D.gd" id="1_fcomv"]
+
+[node name="HitArea2D" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+script = ExtResource("1_fcomv")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

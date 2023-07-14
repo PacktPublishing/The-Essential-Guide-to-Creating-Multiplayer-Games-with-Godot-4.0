@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://cql5xqnwibieq"]
+
+[ext_resource type="PackedScene" uid="uid://vdftbdwhn531" path="res://09.prototyping-space-adventure/Recipes/Hazard/HitArea2D.tscn" id="1"]
+[ext_resource type="Script" path="res://09.prototyping-space-adventure/Objects/Bullet/Bullet2D.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://c0w7ariigwbdk" path="res://09.prototyping-space-adventure/Objects/Bullet/Bullet.svg" id="3"]
+
+[sub_resource type="CapsuleShape2D" id="1"]
+radius = 20.0
+height = 80.0001
+
+[node name="Bullet2D" type="Node2D"]
+modulate = Color(1.05, 1.05, 1.05, 1)
+script = ExtResource("2")
+speed = 1600.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0, 9.53674e-07)
+scale = Vector2(4, 2)
+
+[node name="HitArea2D" parent="." instance=ExtResource("1")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea2D"]
+rotation = 1.57079
+shape = SubResource("1")
+debug_color = Color(0.203922, 0.639216, 0, 0.419608)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="damage_applied" from="HitArea2D" to="." method="_on_hit_area_2d_damage_applied"]

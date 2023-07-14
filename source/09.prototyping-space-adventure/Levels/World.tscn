@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://do4pte4ibydbj"]
+
+[ext_resource type="Script" path="res://09.prototyping-space-adventure/Levels/World.gd" id="1_4v41m"]
+[ext_resource type="PackedScene" uid="uid://ctg86xypep676" path="res://09.prototyping-space-adventure/Recipes/Spawner/Spawner2D.tscn" id="2_not0y"]
+[ext_resource type="PackedScene" uid="uid://ixmsjsthni07" path="res://09.prototyping-space-adventure/Objects/Asteroid/Asteroid.tscn" id="3_c1w0w"]
+[ext_resource type="Script" path="res://09.prototyping-space-adventure/Levels/Authentication.gd" id="3_ex3xd"]
+[ext_resource type="Script" path="res://09.prototyping-space-adventure/Levels/PlayerSpawner2D.gd" id="4_ycgdl"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_4v41m")
+
+[node name="Asteroids" parent="." instance=ExtResource("2_not0y")]
+position = Vector2(508, 296)
+spawn_scene = ExtResource("3_c1w0w")
+
+[node name="Players" parent="." instance=ExtResource("2_not0y")]
+script = ExtResource("4_ycgdl")
+
+[node name="Authentication" type="Node" parent="."]
+script = ExtResource("3_ex3xd")
+
+[node name="AsteroidsSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://09.prototyping-space-adventure/Objects/Asteroid/Asteroid.tscn")
+spawn_path = NodePath("../Asteroids")
+
+[node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://09.prototyping-space-adventure/Actors/Player/Player2D.tscn")
+spawn_path = NodePath("../Players")

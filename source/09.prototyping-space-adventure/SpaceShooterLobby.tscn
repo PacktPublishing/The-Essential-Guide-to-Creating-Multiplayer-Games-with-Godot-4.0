@@ -1,0 +1,106 @@
+[gd_scene load_steps=3 format=3 uid="uid://lm1efw3330du"]
+
+[ext_resource type="Script" path="res://09.prototyping-space-adventure/SpaceShooterLobby.gd" id="1_2s3ym"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_oymwe"]
+font_color = Color(1, 0.2, 0.2, 1)
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Authentication" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2s3ym")
+next_scene = "res://09.prototyping-space-adventure/Levels/World.tscn"
+
+[node name="UserLineEdit" type="LineEdit" parent="Authentication"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = 88.0
+offset_right = 50.0
+offset_bottom = 126.0
+grow_horizontal = 2
+grow_vertical = 2
+placeholder_text = "username"
+alignment = 1
+
+[node name="PasswordLineEdit" type="LineEdit" parent="Authentication"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = 144.0
+offset_right = 50.0
+offset_bottom = 182.0
+grow_horizontal = 2
+grow_vertical = 2
+placeholder_text = "pasword"
+alignment = 1
+secret = true
+
+[node name="ErrorLabel" type="Label" parent="Authentication"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+label_settings = SubResource("LabelSettings_oymwe")
+horizontal_alignment = 1
+
+[node name="LoginButton" type="Button" parent="Authentication"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 75.0
+offset_top = 151.0
+offset_right = 125.0
+offset_bottom = 182.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Login"
+
+[node name="StartButton" type="Button" parent="Authentication"]
+visible = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -48.0
+offset_top = -144.0
+offset_right = 56.0
+offset_bottom = -113.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Login!"
+
+[connection signal="text_submitted" from="Authentication/UserLineEdit" to="Authentication" method="_on_UserLineEdit_text_submitted"]
+[connection signal="text_submitted" from="Authentication/PasswordLineEdit" to="Authentication" method="_on_PasswordLineEdit_text_submitted"]
+[connection signal="pressed" from="Authentication/LoginButton" to="Authentication" method="_on_LoginButton_pressed"]
+[connection signal="pressed" from="Authentication/StartButton" to="Authentication" method="_on_StartButton_pressed"]

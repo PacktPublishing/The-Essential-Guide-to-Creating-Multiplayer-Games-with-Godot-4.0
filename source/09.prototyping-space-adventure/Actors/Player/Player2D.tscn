@@ -1,0 +1,54 @@
+[gd_scene load_steps=10 format=3 uid="uid://b230ar4eqdp0p"]
+
+[ext_resource type="Script" path="res://09.prototyping-space-adventure/Actors/Player/Player2D.gd" id="1_1p2et"]
+[ext_resource type="PackedScene" uid="uid://b5oqsdfa1o7xe" path="res://09.prototyping-space-adventure/Objects/Spaceship/Spaceship.tscn" id="1_8ofev"]
+[ext_resource type="Texture2D" uid="uid://dws2p4b5gde4h" path="res://09.prototyping-space-adventure/Actors/Player/Spaceship.svg" id="3_yuro3"]
+[ext_resource type="PackedScene" uid="uid://bh806by6bowfb" path="res://09.prototyping-space-adventure/Recipes/Hazard/HurtArea2D.tscn" id="4_0q8j3"]
+[ext_resource type="PackedScene" uid="uid://d01tn2bqqn35d" path="res://09.prototyping-space-adventure/Objects/Weapon/Weapon2D.tscn" id="5_y4mpx"]
+[ext_resource type="PackedScene" uid="uid://cql5xqnwibieq" path="res://09.prototyping-space-adventure/Objects/Bullet/Bullet2D.tscn" id="6_8lbu2"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v0fib"]
+radius = 32.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lehnl"]
+radius = 32.0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_evc82"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/1/path = NodePath(".:top_level")
+properties/1/spawn = true
+properties/1/sync = true
+properties/2/path = NodePath("Spaceship:position")
+properties/2/spawn = true
+properties/2/sync = true
+
+[node name="Player" type="Node2D"]
+script = ExtResource("1_1p2et")
+
+[node name="Spaceship" parent="." instance=ExtResource("1_8ofev")]
+inertia = 4.0
+gravity_scale = 0.0
+linear_damp = 1.3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spaceship"]
+shape = SubResource("CircleShape2D_v0fib")
+
+[node name="Sprite2D" type="Sprite2D" parent="Spaceship"]
+texture = ExtResource("3_yuro3")
+
+[node name="HurtArea2D" parent="Spaceship" instance=ExtResource("4_0q8j3")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Spaceship/HurtArea2D"]
+shape = SubResource("CircleShape2D_lehnl")
+debug_color = Color(0.996078, 0, 0.207843, 0.419608)
+
+[node name="Weapon2D" parent="Spaceship" instance=ExtResource("5_y4mpx")]
+position = Vector2(40, 0)
+bullet_scene = ExtResource("6_8lbu2")
+fire_rate = 10
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_evc82")
+visibility_update_mode = 1
