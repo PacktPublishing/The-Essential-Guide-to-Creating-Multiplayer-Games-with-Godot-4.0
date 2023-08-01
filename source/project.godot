@@ -17,6 +17,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 AuthenticationCredentials="*res://02.sending-and-receiving-data/AuthenticationCredentials.tscn"
+QuestDatabase="*res://09.prototyping-space-adventure/Quests/QuestDatabase.gd"
+Quests="*res://09.prototyping-space-adventure/Quests/QuestSingleton.tscn"
 
 [display]
 

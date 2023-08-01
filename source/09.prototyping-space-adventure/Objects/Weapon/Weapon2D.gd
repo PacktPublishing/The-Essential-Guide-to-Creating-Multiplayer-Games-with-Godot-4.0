@@ -9,8 +9,9 @@ extends Marker2D
 @onready var animation_player = $AnimationPlayer
 
 
+@rpc("call_local")
 func fire():
 	if timer.is_stopped():
 		animation_player.play("fire")
-		spawner.spawn(bullet_scene)
+		var bullet = spawner.spawn(bullet_scene)
 		timer.start(1.0 / fire_rate)

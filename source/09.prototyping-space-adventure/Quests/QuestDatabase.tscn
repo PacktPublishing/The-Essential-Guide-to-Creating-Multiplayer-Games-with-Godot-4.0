@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://clfkpg047a8mt"]
+
+[ext_resource type="Script" path="res://09.prototyping-space-adventure/Quests/QuestDatabase.gd" id="1_i302o"]
+
+[node name="QuestDatabase" type="Node"]
+script = ExtResource("1_i302o")

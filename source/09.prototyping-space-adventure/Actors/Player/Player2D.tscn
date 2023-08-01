@@ -23,6 +23,9 @@ properties/1/sync = true
 properties/2/path = NodePath("Spaceship:position")
 properties/2/spawn = true
 properties/2/sync = true
+properties/3/path = NodePath("Spaceship:rotation")
+properties/3/spawn = true
+properties/3/sync = true
 
 [node name="Player" type="Node2D"]
 script = ExtResource("1_1p2et")
@@ -49,6 +52,16 @@ position = Vector2(40, 0)
 bullet_scene = ExtResource("6_8lbu2")
 fire_rate = 10
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="CameraRemoteTransform2D" type="RemoteTransform2D" parent="Spaceship"]
+remote_path = NodePath("../../Camera2D")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." groups=["sync"]]
 replication_config = SubResource("SceneReplicationConfig_evc82")
 visibility_update_mode = 1
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+editor_draw_limits = true
+editor_draw_drag_margin = true

@@ -1,9 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://ixmsjsthni07"]
+[gd_scene load_steps=19 format=3 uid="uid://ixmsjsthni07"]
 
 [ext_resource type="PackedScene" uid="uid://vdftbdwhn531" path="res://09.prototyping-space-adventure/Recipes/Hazard/HitArea2D.tscn" id="1"]
+[ext_resource type="Material" uid="uid://bubygx758qtpb" path="res://09.prototyping-space-adventure/Objects/Asteroid/DamageShader.tres" id="1_6nhu5"]
 [ext_resource type="Texture2D" uid="uid://c30jhii4mn4k0" path="res://09.prototyping-space-adventure/Objects/Asteroid/AsteroidSmall.svg" id="2"]
 [ext_resource type="PackedScene" uid="uid://bh806by6bowfb" path="res://09.prototyping-space-adventure/Recipes/Hazard/HurtArea2D.tscn" id="3"]
 [ext_resource type="Script" path="res://09.prototyping-space-adventure/Objects/Asteroid/Asteroid.gd" id="5"]
+[ext_resource type="PackedScene" uid="uid://d05xb5sjibypl" path="res://09.prototyping-space-adventure/Quests/QuestProgress.tscn" id="6_ocy4h"]
 
 [sub_resource type="Animation" id="4"]
 length = 0.001
@@ -34,49 +36,49 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath(".:material:shader_param/damaged")
+tracks/2/path = NodePath("Sprite2D:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [false]
+"values": [true]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Sprite2D:visible")
+tracks/3/path = NodePath("StaticBody2D/CollisionShape2D:disabled")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [true]
+"values": [false]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("StaticBody2D/CollisionShape2D:disabled")
+tracks/4/path = NodePath(".:material:shader_parameter/damaged")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
+"update": 1,
 "values": [false]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("CPUParticles2D:emitting")
+tracks/5/path = NodePath("GPUParticles2D:emitting")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
+"update": 1,
 "values": [false]
 }
 
@@ -132,31 +134,31 @@ tracks/3/keys = {
 "update": 1,
 "values": [true]
 }
-tracks/4/type = "value"
+tracks/4/type = "method"
 tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("CPUParticles2D:emitting")
+tracks/4/enabled = false
+tracks/4/path = NodePath(".")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/5/type = "method"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath(".")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
 "times": PackedFloat32Array(0.3),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
 "method": &"queue_free"
 }]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("GPUParticles2D:emitting")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.02),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="Animation" id="2"]
@@ -177,8 +179,8 @@ tracks/0/keys = {
 }
 tracks/1/type = "value"
 tracks/1/imported = false
-tracks/1/enabled = false
-tracks/1/path = NodePath(".:material:shader_param/damaged")
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:material:shader_parameter/damaged")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -195,13 +197,32 @@ _data = {
 "hit": SubResource("2")
 }
 
-[sub_resource type="Curve" id="5"]
-_data = [Vector2(0, 0.309091), 0.0, 0.0, 0, 0, Vector2(0.782178, 0.718182), -2.75455, 0.0, 0, 0]
-point_count = 2
-
-[sub_resource type="Gradient" id="6"]
-offsets = PackedFloat32Array(0.497207, 1)
+[sub_resource type="Gradient" id="Gradient_p7db3"]
+offsets = PackedFloat32Array(0.677419, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fxbuf"]
+gradient = SubResource("Gradient_p7db3")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ut075"]
+lifetime_randomness = 0.52
+emission_shape = 1
+emission_sphere_radius = 4.0
+particle_flag_disable_z = true
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 500.0
+initial_velocity_max = 700.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+damping_min = 1800.0
+damping_max = 2500.0
+angle_min = -275.3
+angle_max = 254.1
+scale_min = 12.0
+scale_max = 18.0
+color = Color(0.768627, 0.517647, 0.560784, 1)
+color_ramp = SubResource("GradientTexture1D_fxbuf")
 
 [sub_resource type="CircleShape2D" id="7"]
 radius = 29.0172
@@ -225,6 +246,7 @@ properties/1/sync = true
 
 [node name="Asteroid" type="Node2D"]
 process_priority = -1
+material = ExtResource("1_6nhu5")
 script = ExtResource("5")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -236,42 +258,48 @@ libraries = {
 use_parent_material = true
 texture = ExtResource("2")
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 emitting = false
+amount = 6
+process_material = SubResource("ParticleProcessMaterial_ut075")
 lifetime = 0.3
 explosiveness = 0.9
-randomness = 0.75
-spread = 180.0
-gravity = Vector2(0, 0)
-scale_amount_curve = SubResource("5")
-color = Color(0.588235, 0.258824, 0.32549, 1)
-color_ramp = SubResource("6")
 
 [node name="HitArea2D" parent="." instance=ExtResource("1")]
 team = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea2D"]
+visible = false
 shape = SubResource("7")
 
 [node name="HurtArea2D" parent="." instance=ExtResource("3")]
 team = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtArea2D"]
+visible = false
 shape = SubResource("3")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 physics_material_override = SubResource("PhysicsMaterial_l1uus")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+visible = false
 shape = SubResource("3")
 
 [node name="HitArea2D2" parent="." instance=ExtResource("1")]
 damage = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea2D2"]
+visible = false
 shape = SubResource("CircleShape2D_vwcgq")
 disabled = true
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." groups=["sync"]]
 replication_config = SubResource("SceneReplicationConfig_0bcmk")
-visibility_update_mode = 1
+public_visibility = false
+
+[node name="QuestProgress" parent="." instance=ExtResource("6_ocy4h")]
+
+[connection signal="tree_exiting" from="." to="QuestProgress" method="increase_progress"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="damage_taken" from="HurtArea2D" to="." method="_on_hurt_area_2d_damage_taken"]

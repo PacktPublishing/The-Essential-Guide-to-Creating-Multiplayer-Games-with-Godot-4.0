@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://byev5spcltdm"]
+
+[ext_resource type="Script" path="res://09.prototyping-space-adventure/Quests/QuestSingleton.gd" id="1_hb0nl"]
+
+[node name="QuestSingleton" type="Node"]
+script = ExtResource("1_hb0nl")

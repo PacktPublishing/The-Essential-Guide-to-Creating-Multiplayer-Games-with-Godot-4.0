@@ -1,0 +1,14 @@
+{
+   "user1":{
+	  "asteroid_1":{
+		 "completed":false,
+		 "progress":0
+	  }
+   },
+   "user2":{
+	  "asteroid_1":{
+		 "completed":true,
+		 "progress":10
+	  }
+   }
+}

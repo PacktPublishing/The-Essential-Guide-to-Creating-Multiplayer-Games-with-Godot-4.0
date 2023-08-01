@@ -1,0 +1,6 @@
+{
+	"asteroid_1" : {
+		"title" : "Destroy 10 Asteroids",
+		"description" : "Destroy some asteroids, please. They are taking too much space here",
+		"target_amount" : 10}
+}

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d05xb5sjibypl"]
+
+[ext_resource type="Script" path="res://09.prototyping-space-adventure/Quests/QuestProgress.gd" id="1_aj6s4"]
+
+[node name="QuestProgress" type="Node"]
+script = ExtResource("1_aj6s4")

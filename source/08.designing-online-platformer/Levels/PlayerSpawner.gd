@@ -23,7 +23,3 @@ func _ready():
 			add_child(player)
 			await(get_tree().create_timer(0.1).timeout)
 			player.rpc("setup_multiplayer", player_id)
-
-
-func _on_multiplayer_spawner_spawned(node):
-	node.rpc("setup_multiplayer", int(str(node.name)))

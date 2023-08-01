@@ -12,7 +12,7 @@ var fall_speed = 0.0
 @rpc("any_peer", "call_local")
 func setup_multiplayer(player_id):
 	set_multiplayer_authority(player_id)
-	var is_player = str(player_id) == str(name)
+	var is_player = player_id == get_multiplayer_authority()
 	set_physics_process(is_player)
 	set_process_unhandled_input(is_player)
 	label.text = "P%s" % get_index()

@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://cv516c45jx5rx"]
+
+[ext_resource type="Script" path="res://09.prototyping-space-adventure/Quests/QuestPanel.gd" id="1_mx87w"]
+
+[node name="QuestPanel" type="ScrollContainer"]
+offset_left = 932.0
+offset_top = 388.0
+offset_right = 1280.0
+offset_bottom = 720.0
+script = ExtResource("1_mx87w")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 15

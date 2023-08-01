@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bgqhmuqytc84e"]
+
+[ext_resource type="Script" path="res://09.prototyping-space-adventure/Authentication.gd" id="1_pbmdl"]
+
+[node name="Authentication" type="Node"]
+script = ExtResource("1_pbmdl")
