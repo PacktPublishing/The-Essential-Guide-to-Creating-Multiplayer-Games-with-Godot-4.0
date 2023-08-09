@@ -13,5 +13,5 @@ extends Marker2D
 func fire():
 	if timer.is_stopped():
 		animation_player.play("fire")
-		var bullet = spawner.spawn(bullet_scene)
+		spawner.spawn(bullet_scene)
 		timer.start(1.0 / fire_rate)

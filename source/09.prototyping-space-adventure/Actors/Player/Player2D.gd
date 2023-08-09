@@ -11,21 +11,9 @@ extends Node2D
 @onready var camera = $Camera2D
 
 
-@rpc("any_peer", "call_local")
-func setup_multiplayer(player_id):
-	var self_id = multiplayer.get_unique_id()
-	var is_player = self_id == player_id
-	camera.enabled = is_player
-	if is_player:
-		camera.make_current()
-	set_multiplayer_authority(player_id)
-	set_process(is_player)
-	set_physics_process(is_player)
-
-
 func _process(delta):
 	if Input.is_action_pressed(shoot_action):
-		weapon.rpc("fire")
+		weapon.fire()
 
 
 func _physics_process(delta):

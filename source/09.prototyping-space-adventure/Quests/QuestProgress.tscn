@@ -4,3 +4,4 @@
 
 [node name="QuestProgress" type="Node"]
 script = ExtResource("1_aj6s4")
+quest_id = null

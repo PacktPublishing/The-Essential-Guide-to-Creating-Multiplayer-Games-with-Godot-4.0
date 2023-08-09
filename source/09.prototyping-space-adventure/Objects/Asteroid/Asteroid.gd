@@ -18,7 +18,7 @@ func hit():
 
 
 @rpc("any_peer", "call_local")
-func damage_taken(damage):
+func apply_damage(damage):
 	health -= damage
 	if health < 1:
 		rpc("explode")
@@ -27,7 +27,7 @@ func damage_taken(damage):
 
 
 func _on_hurt_area_2d_damage_taken(damage):
-	rpc_id(1, "damage_taken", damage)
+	rpc_id(1, "apply_damage", damage)
 
 
 func _on_animation_player_animation_finished(anim_name):

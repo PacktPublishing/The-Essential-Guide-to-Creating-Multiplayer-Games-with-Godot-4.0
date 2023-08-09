@@ -2,18 +2,11 @@
 
 [ext_resource type="Script" path="res://09.prototyping-space-adventure/Levels/World.gd" id="1_4v41m"]
 [ext_resource type="PackedScene" uid="uid://ctg86xypep676" path="res://09.prototyping-space-adventure/Recipes/Spawner/Spawner2D.tscn" id="2_not0y"]
+[ext_resource type="PackedScene" uid="uid://cv00gxfi4qouw" path="res://09.prototyping-space-adventure/Recipes/Spawner/RadialSpawner2d.tscn" id="2_yodqh"]
 [ext_resource type="PackedScene" uid="uid://ixmsjsthni07" path="res://09.prototyping-space-adventure/Objects/Asteroid/Asteroid.tscn" id="3_c1w0w"]
-[ext_resource type="PackedScene" uid="uid://bgqhmuqytc84e" path="res://09.prototyping-space-adventure/Authentication.tscn" id="4_vs03a"]
+[ext_resource type="PackedScene" uid="uid://b230ar4eqdp0p" path="res://09.prototyping-space-adventure/Actors/Player/Player2D.tscn" id="4_iadtc"]
 [ext_resource type="PackedScene" uid="uid://cv516c45jx5rx" path="res://09.prototyping-space-adventure/Quests/QuestPanel.tscn" id="5_tt3bh"]
 [ext_resource type="Texture2D" uid="uid://bg1omk7qhoi2j" path="res://09.prototyping-space-adventure/Levels/Star.svg" id="6_qxfj5"]
-
-[sub_resource type="GDScript" id="GDScript_675aw"]
-script/source = "extends Label
-
-
-func _ready():
-	visible = multiplayer.get_unique_id() == 1
-"
 
 [sub_resource type="Curve" id="Curve_xtohv"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -40,32 +33,13 @@ scale_curve = SubResource("CurveTexture_3p4qt")
 [node name="Main" type="Node"]
 script = ExtResource("1_4v41m")
 
-[node name="Asteroids" parent="." instance=ExtResource("2_not0y")]
-position = Vector2(508, 296)
+[node name="Asteroids" parent="." instance=ExtResource("2_yodqh")]
+position = Vector2(640, 360)
 spawn_scene = ExtResource("3_c1w0w")
 
-[node name="Players" type="Marker2D" parent="."]
-
-[node name="Authentication" parent="." instance=ExtResource("4_vs03a")]
-
-[node name="AsteroidsSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://09.prototyping-space-adventure/Objects/Asteroid/Asteroid.tscn")
-spawn_path = NodePath("../Asteroids")
-
-[node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://09.prototyping-space-adventure/Actors/Player/Player2D.tscn")
-spawn_path = NodePath("../Players")
-
-[node name="Label" type="Label" parent="."]
-visible = false
-anchors_preset = 10
-anchor_right = 1.0
-offset_top = 80.0
-offset_bottom = 106.0
-grow_horizontal = 2
-text = "I'm server"
-horizontal_alignment = 1
-script = SubResource("GDScript_675aw")
+[node name="Players" parent="." instance=ExtResource("2_not0y")]
+position = Vector2(220, 196)
+spawn_scene = ExtResource("4_iadtc")
 
 [node name="InterfaceCanvasLayer" type="CanvasLayer" parent="."]
 layer = 2
@@ -109,5 +83,3 @@ process_material = SubResource("ParticleProcessMaterial_imv6t")
 texture = ExtResource("6_qxfj5")
 lifetime = 8.0
 preprocess = 4.0
-
-[connection signal="spawned" from="PlayerSpawner" to="." method="_on_player_spawner_spawned"]

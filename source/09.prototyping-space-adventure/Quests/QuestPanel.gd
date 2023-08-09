@@ -3,6 +3,7 @@ extends ScrollContainer
 
 func _ready():
 	Quests.quest_created.connect(add_quest)
+	Quests.retrieve_quests()
 
 
 func add_quest(quest):

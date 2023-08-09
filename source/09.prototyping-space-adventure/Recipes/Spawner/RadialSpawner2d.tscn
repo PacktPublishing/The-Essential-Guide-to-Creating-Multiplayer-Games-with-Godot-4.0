@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cv00gxfi4qouw"]
+
+[ext_resource type="PackedScene" uid="uid://ctg86xypep676" path="res://09.prototyping-space-adventure/Recipes/Spawner/Spawner2D.tscn" id="1_8uasi"]
+[ext_resource type="Script" path="res://09.prototyping-space-adventure/Recipes/Spawner/RadialSpawner2d.gd" id="2_npip5"]
+
+[node name="RadialSpawner2D" instance=ExtResource("1_8uasi")]
+script = ExtResource("2_npip5")
+radius = 300.0
+min_angle = 3.14159
+max_angle = 6.28319
