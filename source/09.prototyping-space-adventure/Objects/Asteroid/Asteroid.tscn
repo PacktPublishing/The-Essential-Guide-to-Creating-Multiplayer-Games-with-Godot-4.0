@@ -273,6 +273,7 @@ physics_material_override = SubResource("PhysicsMaterial_l1uus")
 shape = SubResource("3")
 
 [node name="QuestProgress" parent="." instance=ExtResource("6_ocy4h")]
+quest_id = "asteroid_1"
 
 [connection signal="tree_exiting" from="." to="QuestProgress" method="increase_progress"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

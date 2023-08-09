@@ -30,7 +30,7 @@ func increase_quest_progress(quest_id, amount):
 		return
 	var quest = quests[quest_id]
 	quest.current_amount += amount
-	QuestDatabase.rpc_id(1, "update_player_progress", AuthenticationCredentials.user, quest_id, quest.current_amount, quest.completed)
+	QuestDatabase.update_player_progress(quest_id, quest.current_amount, quest.completed)
 
 
 func get_quest(quest_id):

@@ -47,9 +47,9 @@ func get_player_quests():
 	return quests
 
 
-func update_player_progress(player_id, quest_id, current_amount, completed):
-	progress_database[player_id][quest_id]["progress"] = current_amount
-	progress_database[player_id][quest_id]["completed"] = completed
+func update_player_progress(quest_id, current_amount, completed):
+	progress_database[quest_id]["progress"] = current_amount
+	progress_database[quest_id]["completed"] = completed
 
 
 func get_title(quest_id):
