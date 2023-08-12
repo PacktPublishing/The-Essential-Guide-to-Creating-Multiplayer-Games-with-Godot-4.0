@@ -11,7 +11,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_1d1nr")
 server_scene = "res://09.prototyping-space-adventure/Levels/World.tscn"
-client_scene = "res://09.prototyping-space-adventure/SpaceShooterLobby.tscn"
+client_scene = "res://09.prototyping-space-adventure/LoggingScreen.tscn"
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1

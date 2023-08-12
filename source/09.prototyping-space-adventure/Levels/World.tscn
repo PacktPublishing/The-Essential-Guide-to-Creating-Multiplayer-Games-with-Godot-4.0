@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://do4pte4ibydbj"]
+[gd_scene load_steps=13 format=3 uid="uid://do4pte4ibydbj"]
 
 [ext_resource type="Script" path="res://09.prototyping-space-adventure/Levels/World.gd" id="1_4v41m"]
 [ext_resource type="PackedScene" uid="uid://ctg86xypep676" path="res://09.prototyping-space-adventure/Recipes/Spawner/Spawner2D.tscn" id="2_not0y"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://b230ar4eqdp0p" path="res://09.prototyping-space-adventure/Actors/Player/Player2D.tscn" id="4_iadtc"]
 [ext_resource type="PackedScene" uid="uid://cv516c45jx5rx" path="res://09.prototyping-space-adventure/Quests/QuestPanel.tscn" id="5_tt3bh"]
 [ext_resource type="Texture2D" uid="uid://bg1omk7qhoi2j" path="res://09.prototyping-space-adventure/Levels/Star.svg" id="6_qxfj5"]
+[ext_resource type="PackedScene" uid="uid://bgqhmuqytc84e" path="res://09.prototyping-space-adventure/Authentication.tscn" id="8_dmrke"]
 
 [sub_resource type="Curve" id="Curve_xtohv"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -29,6 +30,14 @@ angle_min = -45.0
 angle_max = 45.0
 scale_min = 0.3
 scale_curve = SubResource("CurveTexture_3p4qt")
+
+[sub_resource type="GDScript" id="GDScript_88vyb"]
+script/source = "extends Label
+
+
+func _ready():
+	visible = multiplayer.is_server()
+"
 
 [node name="Main" type="Node"]
 script = ExtResource("1_4v41m")
@@ -83,3 +92,25 @@ process_material = SubResource("ParticleProcessMaterial_imv6t")
 texture = ExtResource("6_qxfj5")
 lifetime = 8.0
 preprocess = 4.0
+
+[node name="Authentication" parent="." instance=ExtResource("8_dmrke")]
+
+[node name="AsteroidsMultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://09.prototyping-space-adventure/Objects/Asteroid/Asteroid.tscn")
+spawn_path = NodePath("../Asteroids")
+
+[node name="PlayersMultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://09.prototyping-space-adventure/Actors/Player/Player2D.tscn")
+spawn_path = NodePath("../Players")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "I'm server"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = SubResource("GDScript_88vyb")
+
+[connection signal="spawned" from="PlayersMultiplayerSpawner" to="." method="_on_players_multiplayer_spawner_spawned"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://b230ar4eqdp0p"]
+[gd_scene load_steps=10 format=3 uid="uid://b230ar4eqdp0p"]
 
 [ext_resource type="Script" path="res://09.prototyping-space-adventure/Actors/Player/Player2D.gd" id="1_1p2et"]
 [ext_resource type="PackedScene" uid="uid://b5oqsdfa1o7xe" path="res://09.prototyping-space-adventure/Objects/Spaceship/Spaceship.tscn" id="1_8ofev"]
@@ -12,6 +12,20 @@ radius = 32.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lehnl"]
 radius = 32.0
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_522eh"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/1/path = NodePath(".:top_level")
+properties/1/spawn = true
+properties/1/sync = true
+properties/2/path = NodePath("Spaceship:position")
+properties/2/spawn = true
+properties/2/sync = true
+properties/3/path = NodePath("Spaceship:rotation")
+properties/3/spawn = true
+properties/3/sync = true
 
 [node name="Player" type="Node2D"]
 script = ExtResource("1_1p2et")
@@ -47,3 +61,7 @@ drag_horizontal_enabled = true
 drag_vertical_enabled = true
 editor_draw_limits = true
 editor_draw_drag_margin = true
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_522eh")
+visibility_update_mode = 1

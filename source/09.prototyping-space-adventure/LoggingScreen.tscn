@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://lm1efw3330du"]
 
-[ext_resource type="Script" path="res://09.prototyping-space-adventure/SpaceShooterLobby.gd" id="1_2s3ym"]
+[ext_resource type="Script" path="res://09.prototyping-space-adventure/LoggingScreen.gd" id="1_3kpg8"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_oymwe"]
 font_color = Color(1, 0.2, 0.2, 1)
@@ -20,7 +20,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_2s3ym")
+script = ExtResource("1_3kpg8")
 next_scene = "res://09.prototyping-space-adventure/Levels/World.tscn"
 
 [node name="UserLineEdit" type="LineEdit" parent="Authentication"]

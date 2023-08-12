@@ -8,11 +8,12 @@ var quest_database = {}
 var progress_database = {}
 
 func _ready():
-	load_database()
+	if multiplayer.is_server():
+		load_database()
 
 
 func _notification(notification):
-	if notification == NOTIFICATION_WM_CLOSE_REQUEST:
+	if notification == NOTIFICATION_WM_CLOSE_REQUEST and multiplayer.is_server():
 		store_database()
 
 
@@ -33,23 +34,27 @@ func store_database():
 	progress_database_file.close()
 
 
-func get_player_quests():
+@rpc("any_peer", "call_remote")
+func get_player_quests(user):
+	var requester_id = multiplayer.get_remote_sender_id()
 	var quests = {}
-	for quest in progress_database:
+	for quest in progress_database[user]:
 		var quest_data = {}
 		quest_data["id"] = quest
 		quest_data["title"] = get_title(quest)
 		quest_data["description"] = get_description(quest)
 		quest_data["target_amount"] = get_target_amount(quest)
-		quest_data["current_amount"] = get_progress(quest)
-		quest_data["completed"] = get_completion(quest)
+		quest_data["current_amount"] = get_progress(quest, user)
+		quest_data["completed"] = get_completion(quest, user)
 		quests[quest] = quest_data
-	return quests
+		Quests.rpc_id(requester_id, "create_quest", quest_data)
 
 
-func update_player_progress(quest_id, current_amount, completed):
-	progress_database[quest_id]["progress"] = current_amount
-	progress_database[quest_id]["completed"] = completed
+@rpc("any_peer", "call_remote")
+func update_player_progress(quest_id, current_amount, completed, user):
+	if multiplayer.is_server():
+		progress_database[user][quest_id]["progress"] = current_amount
+		progress_database[user][quest_id]["completed"] = completed
 
 
 func get_title(quest_id):
@@ -64,9 +69,9 @@ func get_target_amount(quest_id):
 	return quest_database[quest_id]["target_amount"]
 
 
-func get_progress(quest_id):
-	return progress_database[quest_id]["progress"]
+func get_progress(quest_id, user):
+	return progress_database[user][quest_id]["progress"]
 
 
-func get_completion(quest_id):
-	return progress_database[quest_id]["completed"]
+func get_completion(quest_id, user):
+	return progress_database[user][quest_id]["completed"]

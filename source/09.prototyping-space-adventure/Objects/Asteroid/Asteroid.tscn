@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://ixmsjsthni07"]
+[gd_scene load_steps=18 format=3 uid="uid://ixmsjsthni07"]
 
 [ext_resource type="PackedScene" uid="uid://vdftbdwhn531" path="res://09.prototyping-space-adventure/Recipes/Hazard/HitArea2D.tscn" id="1"]
 [ext_resource type="Material" uid="uid://bubygx758qtpb" path="res://09.prototyping-space-adventure/Objects/Asteroid/DamageShader.tres" id="1_6nhu5"]
@@ -233,6 +233,14 @@ radius = 29.0172
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_l1uus"]
 bounce = 0.2
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_krk3o"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/1/path = NodePath(".:top_level")
+properties/1/spawn = true
+properties/1/sync = true
+
 [node name="Asteroid" type="Node2D"]
 process_priority = -1
 material = ExtResource("1_6nhu5")
@@ -274,6 +282,10 @@ shape = SubResource("3")
 
 [node name="QuestProgress" parent="." instance=ExtResource("6_ocy4h")]
 quest_id = "asteroid_1"
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." groups=["Sync"]]
+replication_config = SubResource("SceneReplicationConfig_krk3o")
+public_visibility = false
 
 [connection signal="tree_exiting" from="." to="QuestProgress" method="increase_progress"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

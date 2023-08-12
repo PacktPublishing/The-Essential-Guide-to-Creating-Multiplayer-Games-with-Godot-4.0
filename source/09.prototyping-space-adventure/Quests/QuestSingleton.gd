@@ -7,11 +7,13 @@ var quests = {}
 
 
 func retrieve_quests():
-	var player_quests = QuestDatabase.get_player_quests()
-	for quest in player_quests:
-		create_quest(player_quests[quest])
+	if multiplayer.is_server():
+		return
+	await(get_tree().create_timer(0.1).timeout)
+	QuestDatabase.rpc_id(1, "get_player_quests", AuthenticationCredentials.user)
 
 
+@rpc("authority", "call_remote")
 func create_quest(quest_data):
 	var quest = quest_scene.instantiate()
 	quest.id = quest_data["id"]
@@ -30,7 +32,7 @@ func increase_quest_progress(quest_id, amount):
 		return
 	var quest = quests[quest_id]
 	quest.current_amount += amount
-	QuestDatabase.update_player_progress(quest_id, quest.current_amount, quest.completed)
+	QuestDatabase.rpc_id(1, "update_player_progress", quest_id, quest.current_amount, quest.completed, AuthenticationCredentials.user)
 
 
 func get_quest(quest_id):

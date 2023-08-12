@@ -11,7 +11,7 @@ var logged_users = {}
 
 
 func _ready():
-	if multiplayer.get_unique_id() == 1:
+	if multiplayer.is_server():
 		peer.create_server(PORT)
 		multiplayer.multiplayer_peer = peer
 		load_database()

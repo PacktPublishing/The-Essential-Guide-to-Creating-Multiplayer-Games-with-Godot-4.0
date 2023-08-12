@@ -79,7 +79,7 @@ func authentication_succeed(session_token):
 
 
 func _on_StartButton_pressed():
-	rpc_id(get_multiplayer_authority(), "start_game")
+	rpc_id(1, "start_game")
 
 
 @rpc("authority", "call_local")

@@ -2,6 +2,7 @@ extends ScrollContainer
 
 var quest_labels = {}
 
+
 func _ready():
 	Quests.quest_created.connect(add_quest)
 	Quests.retrieve_quests()
