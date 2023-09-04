@@ -7,9 +7,14 @@ extends Node
 var quest_database = {}
 var progress_database = {}
 
+var quest_update_count = 0
+
 func _ready():
 	if multiplayer.is_server():
 		load_database()
+		
+		var update_quests = Callable(self, "get_quest_update_count")
+		Performance.add_custom_monitor("Network/Quests Updates", update_quests)
 
 
 func _notification(notification):
@@ -55,6 +60,7 @@ func update_player_progress(quest_id, current_amount, completed, user):
 	if multiplayer.is_server():
 		progress_database[user][quest_id]["progress"] = current_amount
 		progress_database[user][quest_id]["completed"] = completed
+		quest_update_count += 1
 
 
 func get_title(quest_id):
@@ -75,3 +81,7 @@ func get_progress(quest_id, user):
 
 func get_completion(quest_id, user):
 	return progress_database[user][quest_id]["completed"]
+
+
+func get_quest_update_count():
+	return quest_update_count

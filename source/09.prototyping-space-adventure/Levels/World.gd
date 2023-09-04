@@ -9,6 +9,7 @@ func _ready():
 		await(get_tree().create_timer(0.1).timeout)
 		rpc_id(1, "sync_world")
 		rpc_id(1, "create_spaceship")
+		push_warning("I'm the client with %s unique ID" % multiplayer.get_unique_id())
 	else:
 		for i in 30:
 			asteroid_spawner.spawn()

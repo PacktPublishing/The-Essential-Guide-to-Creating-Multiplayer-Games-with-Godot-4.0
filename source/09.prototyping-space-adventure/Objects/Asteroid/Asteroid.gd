@@ -20,7 +20,7 @@ func explode():
 	animator.play("explode")
 
 
-@rpc("authority", "call_local")
+@rpc("authority", "call_remote")
 func hit():
 	animator.play("hit")
 

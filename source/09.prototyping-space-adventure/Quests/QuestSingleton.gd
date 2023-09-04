@@ -5,6 +5,13 @@ signal quest_created(new_quest)
 var quest_scene = preload("res://09.prototyping-space-adventure/Quests/Quest.tscn")
 var quests = {}
 
+var increase_count = 0
+
+
+func _ready():
+	var callable = Callable(self, "get_quest_increases")
+	Performance.add_custom_monitor("Network/Quest Increases", callable)
+
 
 func retrieve_quests():
 	if multiplayer.is_server():
@@ -34,6 +41,13 @@ func increase_quest_progress(quest_id, amount):
 	quest.current_amount += amount
 	QuestDatabase.rpc_id(1, "update_player_progress", quest_id, quest.current_amount, quest.completed, AuthenticationCredentials.user)
 
+	if quest.current_amount < quest.target_amount:
+		increase_count += 1
+
 
 func get_quest(quest_id):
 	return quests[quest_id]
+
+
+func get_quest_increases():
+	return increase_count
