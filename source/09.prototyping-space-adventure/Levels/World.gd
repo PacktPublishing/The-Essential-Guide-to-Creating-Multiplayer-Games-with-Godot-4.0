@@ -11,10 +11,26 @@ func _ready():
 		await get_tree().create_timer(latency).timeout
 		rpc_id(1, "sync_world")
 		rpc_id(1, "create_spaceship")
-		push_warning("I'm the client with %s unique ID" % multiplayer.get_unique_id())
 	else:
+		var callable = Callable(self, "get_received_data")
+		Performance.add_custom_monitor("Network/Received Data", callable)
+		callable = Callable(self, "get_sent_data")
+		Performance.add_custom_monitor("Network/Sent Data", callable)
+
 		for i in 30:
 			asteroid_spawner.spawn()
+
+
+func get_received_data():
+	var enet_connection = multiplayer.multiplayer_peer.host
+	var data_received = enet_connection.pop_statistic(ENetConnection.HOST_TOTAL_RECEIVED_DATA)
+	return data_received
+
+
+func get_sent_data():
+	var enet_connection = multiplayer.multiplayer_peer.host
+	var data_sent = enet_connection.pop_statistic(ENetConnection.HOST_TOTAL_SENT_DATA)
+	return data_sent
 
 
 @rpc("any_peer", "call_remote")
@@ -30,7 +46,9 @@ func create_spaceship():
 @rpc("any_peer", "call_local")
 func sync_world():
 	var player_id = multiplayer.get_remote_sender_id()
+
 	get_tree().call_group("Sync", "set_visibility_for", player_id, true)
+	get_tree().call_group("Sync", "update_visibility", player_id)
 
 
 func _on_players_multiplayer_spawner_spawned(node):

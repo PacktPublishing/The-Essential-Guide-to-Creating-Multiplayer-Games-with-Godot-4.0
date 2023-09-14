@@ -285,6 +285,7 @@ quest_id = "asteroid_1"
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." groups=["Sync"]]
 replication_config = SubResource("SceneReplicationConfig_krk3o")
+visibility_update_mode = 2
 public_visibility = false
 
 [connection signal="tree_exiting" from="." to="QuestProgress" method="increase_progress"]

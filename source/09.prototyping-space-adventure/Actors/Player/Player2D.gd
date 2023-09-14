@@ -17,15 +17,18 @@ func setup_multiplayer(player_id):
 	var is_player = self_id == player_id
 	set_process(is_player)
 	set_physics_process(is_player)
+	set_process_unhandled_input(is_player)
 	camera.enabled = is_player
 	if is_player:
 		camera.make_current()
 	set_multiplayer_authority(player_id)
 
 
-func _process(delta):
-	if Input.is_action_pressed(shoot_action):
-		weapon.rpc("fire")
+func _unhandled_input(event):
+	if event.is_action_pressed("shoot"):
+		weapon.rpc("set_firing", true)
+	elif event.is_action_released("shoot"):
+		weapon.rpc("set_firing", false)
 
 
 func _physics_process(delta):

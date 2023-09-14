@@ -16,7 +16,9 @@ var peer = ENetMultiplayerPeer.new()
 
 func _ready():
 	peer.create_client(ADDRESS, PORT)
+	peer.host.compress(ENetConnection.COMPRESS_ZLIB)
 	multiplayer.multiplayer_peer = peer
+	
 
 	error_label.text = "Insert username and password"
 	user_line_edit.grab_focus()

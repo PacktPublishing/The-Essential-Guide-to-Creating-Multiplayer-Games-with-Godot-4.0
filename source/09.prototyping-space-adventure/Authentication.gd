@@ -13,11 +13,11 @@ var logged_users = {}
 func _ready():
 	if multiplayer.is_server():
 		peer.create_server(PORT)
-		multiplayer.multiplayer_peer = peer
 		load_database()
 	else:
 		peer.create_client(ADDRESS, PORT)
-		multiplayer.multiplayer_peer = peer
+	peer.host.compress(ENetConnection.COMPRESS_ZLIB)
+	multiplayer.multiplayer_peer = peer
 
 
 func load_database(path_to_database_file = database_file_path):

@@ -60,3 +60,5 @@ texture = ExtResource("2")
 libraries = {
 "": SubResource("AnimationLibrary_m5mll")
 }
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
