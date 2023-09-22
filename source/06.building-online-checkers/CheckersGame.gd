@@ -5,9 +5,6 @@ extends Node
 @onready var winner_label = $HUD/Label
 
 
-func _ready():
-	_on_checker_board_player_won("Black")
-
 @rpc("any_peer", "call_local")
 func update_winner(winner):
 	winner_label.text = "%s won the match!" % winner

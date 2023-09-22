@@ -9,7 +9,7 @@ enum Teams{BLACK, WHITE}
 @export var is_king = false: set = _set_is_king
 @export var king_texture = preload("res://06.building-online-checkers/WhiteKing.svg")
 
-@onready var area = $SelectionArea2D
+@onready var area = $Area2D
 @onready var selected_color_rect = $SelectedColorRect
 @onready var enabled_color_rect = $EnabledColorRect
 @onready var sprite = $Sprite2D
