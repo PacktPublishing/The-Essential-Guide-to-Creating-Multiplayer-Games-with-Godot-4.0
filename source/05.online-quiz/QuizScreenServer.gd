@@ -30,6 +30,17 @@ func missed(user):
 	wait_label.rpc("wait", turn_delay_in_seconds)
 
 
+@rpc("any_peer", "call_remote")
+func get_player_name(user):
+	var sender = multiplayer.get_remote_sender_id()
+	rpc_id(sender, "set_player_name", database[user]["name"])
+
+
+@rpc("any_peer", "call_remote")
+func set_player_name(player_name):
+	pass
+
+
 func _on_timer_timeout():
 	generate_new_question()
 
