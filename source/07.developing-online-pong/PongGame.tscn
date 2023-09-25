@@ -91,6 +91,7 @@ offset_left = 704.0
 offset_right = 896.0
 
 [node name="WinnerDisplay" type="ColorRect" parent="Interface"]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
