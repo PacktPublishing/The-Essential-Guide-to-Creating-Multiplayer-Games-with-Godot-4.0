@@ -114,7 +114,7 @@ label_settings = SubResource("LabelSettings_nix8t")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Button" type="Button" parent="Interface/WinnerDisplay"]
+[node name="RematchButton" type="Button" parent="Interface/WinnerDisplay"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -133,4 +133,4 @@ text = "Rematch"
 [connection signal="scored" from="ScoreArea" to="Interface/HUD/ScoreLabel2" method="update_score"]
 [connection signal="scored" from="ScoreArea2" to="." method="_on_score_area_scored"]
 [connection signal="scored" from="ScoreArea2" to="Interface/HUD/ScoreLabel" method="update_score"]
-[connection signal="pressed" from="Interface/WinnerDisplay/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Interface/WinnerDisplay/RematchButton" to="." method="_on_button_pressed"]
