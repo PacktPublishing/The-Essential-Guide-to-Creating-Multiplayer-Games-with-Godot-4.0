@@ -20,6 +20,12 @@ properties/0/sync = true
 properties/1/path = NodePath(".:top_level")
 properties/1/spawn = true
 properties/1/sync = true
+properties/2/path = NodePath("Spaceship:position")
+properties/2/spawn = false
+properties/2/sync = false
+properties/3/path = NodePath("Spaceship:rotation")
+properties/3/spawn = false
+properties/3/sync = false
 
 [node name="Player" type="Node2D"]
 script = ExtResource("1_1p2et")
@@ -58,13 +64,15 @@ editor_draw_drag_margin = true
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_3nhov")
-visibility_update_mode = 2
+visibility_update_mode = 1
 
 [node name="InterpolationTimer" type="Timer" parent="."]
 process_callback = 0
 wait_time = 0.1
 
 [node name="SynchronizationTimer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 5.0
 
 [connection signal="timeout" from="InterpolationTimer" to="." method="_on_interpolation_timer_timeout"]
 [connection signal="timeout" from="SynchronizationTimer" to="." method="_on_synchronization_timer_timeout"]
