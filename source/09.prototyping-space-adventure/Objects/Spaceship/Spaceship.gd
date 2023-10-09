@@ -19,7 +19,6 @@ func _physics_process(delta):
 
 func thrust(delta):
 	linear_velocity += (acceleration * delta) * Vector2.RIGHT.rotated(rotation)
-	print("Thrusting caller is: %s" % multiplayer.get_unique_id())
 
 
 func turn(delta):
@@ -28,7 +27,6 @@ func turn(delta):
 
 @rpc("any_peer", "call_local")
 func set_thrusting(is_thrusting):
-	print("Set thrusting caller is: %s" % multiplayer.get_remote_sender_id())
 	thrusting = is_thrusting
 
 
