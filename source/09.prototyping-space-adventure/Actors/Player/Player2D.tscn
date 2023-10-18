@@ -73,5 +73,7 @@ wait_time = 0.1
 [node name="SynchronizationTimer" type="Timer" parent="."]
 process_callback = 0
 
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+
 [connection signal="timeout" from="InterpolationTimer" to="." method="_on_interpolation_timer_timeout"]
 [connection signal="timeout" from="SynchronizationTimer" to="." method="_on_synchronization_timer_timeout"]

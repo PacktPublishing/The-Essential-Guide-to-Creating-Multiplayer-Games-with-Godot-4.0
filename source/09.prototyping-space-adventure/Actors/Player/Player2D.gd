@@ -36,7 +36,22 @@ func load_spaceship(user):
 		var image = Image.load_from_file(spaceship_file)
 		var texture = ImageTexture.create_from_image(image)
 		$Spaceship/Sprite2D.texture = texture
+	else:
+		download_spaceship(user, spaceship_file)
 
+
+func download_spaceship(user, file_path):
+	var http = $HTTPRequest
+	var players_spaceships = {}
+	if FileAccess.file_exists("user://.cache/PlayerSpaceships.json"):
+		var file = FileAccess.open("user://.cache/PlayerSpaceships.json", FileAccess.READ)
+		players_spaceships = JSON.parse_string(file.get_as_text())
+	if user in players_spaceships:
+		http.download_file = file_path
+		http.request(players_spaceships[user])
+		await http.request_completed
+		load_spaceship(user)
+	
 
 func _unhandled_input(event):
 	if event.is_action_pressed("shoot"):
