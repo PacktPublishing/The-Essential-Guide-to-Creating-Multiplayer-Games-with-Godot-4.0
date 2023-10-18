@@ -29,6 +29,15 @@ func setup_multiplayer(player_id):
 		$SynchronizationTimer.start()
 
 
+@rpc("authority", "call_local")
+func load_spaceship(user):
+	var spaceship_file = "user://.cache/" + user + "_spaceship.png"
+	if FileAccess.file_exists(spaceship_file):
+		var image = Image.load_from_file(spaceship_file)
+		var texture = ImageTexture.create_from_image(image)
+		$Spaceship/Sprite2D.texture = texture
+
+
 func _unhandled_input(event):
 	if event.is_action_pressed("shoot"):
 		weapon.rpc("set_firing", true)

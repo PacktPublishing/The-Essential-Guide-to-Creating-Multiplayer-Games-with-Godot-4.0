@@ -3,6 +3,8 @@ extends Node
 @onready var asteroid_spawner = $Asteroids
 @onready var player_spawner = $Players
 
+var player_users = {}
+
 
 func _ready():
 	if not multiplayer.is_server():
@@ -10,7 +12,7 @@ func _ready():
 		var latency = server_connection.get_statistic(ENetPacketPeer.PEER_ROUND_TRIP_TIME) / (1000 * 2)
 		await get_tree().create_timer(latency).timeout
 		rpc_id(1, "sync_world")
-		rpc_id(1, "create_spaceship")
+		rpc_id(1, "create_spaceship", AuthenticationCredentials.user)
 	else:
 		var callable = Callable(self, "get_received_data")
 		Performance.add_custom_monitor("Network/Received Data", callable)
@@ -34,13 +36,15 @@ func get_sent_data():
 
 
 @rpc("any_peer", "call_remote")
-func create_spaceship():
+func create_spaceship(user):
 	var player_id = multiplayer.get_remote_sender_id()
 	var spaceship = preload("res://09.prototyping-space-adventure/Actors/Player/Player2D.tscn").instantiate()
 	spaceship.name = str(player_id)
+	player_users[spaceship.name] = user
 	$Players.add_child(spaceship)
 #	await(get_tree().create_timer(0.1).timeout)
 	spaceship.rpc("setup_multiplayer", player_id)
+	spaceship.rpc("load_spaceship", user)
 
 
 @rpc("any_peer", "call_local")
@@ -52,4 +56,15 @@ func sync_world():
 
 
 func _on_players_multiplayer_spawner_spawned(node):
-	node.rpc("setup_multiplayer", int(str(node.name)))
+	var player_id = int(str(node.name))
+	node.rpc("setup_multiplayer", player_id)
+	if not multiplayer.is_server():
+		rpc_id(1, "sync_spaceship", player_id)
+
+
+@rpc("any_peer", "call_local")
+func sync_spaceship(player_id):
+	var requester = multiplayer.get_remote_sender_id()
+	var node = get_node("Players/%s" % player_id)
+	var user = player_users[node.name]
+	node.rpc_id(requester, "load_spaceship", user)
