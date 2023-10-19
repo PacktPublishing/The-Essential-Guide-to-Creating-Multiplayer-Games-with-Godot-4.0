@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cv516c45jx5rx" path="res://09.prototyping-space-adventure/Quests/QuestPanel.tscn" id="5_tt3bh"]
 [ext_resource type="Texture2D" uid="uid://bg1omk7qhoi2j" path="res://09.prototyping-space-adventure/Levels/Star.svg" id="6_qxfj5"]
 [ext_resource type="PackedScene" uid="uid://bgqhmuqytc84e" path="res://09.prototyping-space-adventure/Authentication.tscn" id="8_dmrke"]
-[ext_resource type="Script" path="res://09.prototyping-space-adventure/Levels/SpaceshipsDatabaseDownloadHTTPRequest.gd" id="9_iprvr"]
+[ext_resource type="PackedScene" uid="uid://csu12afks1847" path="res://09.prototyping-space-adventure/SpaceshipsDatabaseDownloadHttpRequest.tscn" id="9_07r8i"]
 
 [sub_resource type="Curve" id="Curve_xtohv"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -114,7 +114,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = SubResource("GDScript_88vyb")
 
-[node name="SpaceshipsDatabaseDownloadHTTPRequest" type="HTTPRequest" parent="."]
-script = ExtResource("9_iprvr")
+[node name="SpaceshipsDatabaseDownloadHTTPRequest" parent="." instance=ExtResource("9_07r8i")]
 
 [connection signal="spawned" from="PlayersMultiplayerSpawner" to="." method="_on_players_multiplayer_spawner_spawned"]

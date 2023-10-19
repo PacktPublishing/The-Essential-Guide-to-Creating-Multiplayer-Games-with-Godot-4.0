@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://21la7bu7agif"]
+
+[ext_resource type="Script" path="res://09.prototyping-space-adventure/TextureDownloadHTTPRequest.gd" id="1_pr3pb"]
+
+[node name="TextureDownloadHTTPRequest" type="HTTPRequest"]
+script = ExtResource("1_pr3pb")

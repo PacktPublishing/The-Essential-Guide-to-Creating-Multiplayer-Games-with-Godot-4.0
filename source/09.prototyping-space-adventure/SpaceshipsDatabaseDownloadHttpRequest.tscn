@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://csu12afks1847"]
+
+[ext_resource type="Script" path="res://09.prototyping-space-adventure/SpaceshipsDatabaseDownloadHTTPRequest.gd" id="1_wodrw"]
+
+[node name="SpaceshipsDatabaseDownloadHTTPRequest" type="HTTPRequest"]
+script = ExtResource("1_wodrw")
