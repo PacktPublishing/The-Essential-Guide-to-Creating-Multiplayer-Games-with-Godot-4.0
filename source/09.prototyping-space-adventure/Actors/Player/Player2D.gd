@@ -9,6 +9,7 @@ extends Node2D
 @onready var spaceship = $Spaceship
 @onready var weapon = $Spaceship/Weapon2D
 @onready var camera = $Camera2D
+@onready var http_request = $TextureDownloadHTTPRequest
 
 @onready var previous_position = spaceship.position
 @onready var previous_rotation = spaceship.rotation
@@ -33,25 +34,17 @@ func setup_multiplayer(player_id):
 func load_spaceship(user):
 	var spaceship_file = "user://.cache/" + user + "_spaceship.png"
 	if FileAccess.file_exists(spaceship_file):
-		var image = Image.load_from_file(spaceship_file)
-		var texture = ImageTexture.create_from_image(image)
-		$Spaceship/Sprite2D.texture = texture
+		update_sprite(spaceship_file)
 	else:
-		download_spaceship(user, spaceship_file)
+		if await http_request.download_spaceship(user, spaceship_file) == OK:
+			update_sprite(spaceship_file)
 
 
-func download_spaceship(user, file_path):
-	var http = $HTTPRequest
-	var players_spaceships = {}
-	if FileAccess.file_exists("user://.cache/PlayerSpaceships.json"):
-		var file = FileAccess.open("user://.cache/PlayerSpaceships.json", FileAccess.READ)
-		players_spaceships = JSON.parse_string(file.get_as_text())
-	if user in players_spaceships:
-		http.download_file = file_path
-		http.request(players_spaceships[user])
-		await http.request_completed
-		load_spaceship(user)
-	
+func update_sprite(spaceship_file):
+	var image = Image.load_from_file(spaceship_file)
+	var texture = ImageTexture.create_from_image(image)
+	$Spaceship/Sprite2D.texture = texture
+
 
 func _unhandled_input(event):
 	if event.is_action_pressed("shoot"):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b230ar4eqdp0p"]
+[gd_scene load_steps=11 format=3 uid="uid://b230ar4eqdp0p"]
 
 [ext_resource type="Script" path="res://09.prototyping-space-adventure/Actors/Player/Player2D.gd" id="1_1p2et"]
 [ext_resource type="PackedScene" uid="uid://b5oqsdfa1o7xe" path="res://09.prototyping-space-adventure/Objects/Spaceship/Spaceship.tscn" id="1_8ofev"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bh806by6bowfb" path="res://09.prototyping-space-adventure/Recipes/Hazard/HurtArea2D.tscn" id="4_0q8j3"]
 [ext_resource type="PackedScene" uid="uid://d01tn2bqqn35d" path="res://09.prototyping-space-adventure/Objects/Weapon/Weapon2D.tscn" id="5_y4mpx"]
 [ext_resource type="PackedScene" uid="uid://cql5xqnwibieq" path="res://09.prototyping-space-adventure/Objects/Bullet/Bullet2D.tscn" id="6_8lbu2"]
+[ext_resource type="Script" path="res://09.prototyping-space-adventure/Actors/Player/TextureDownloadHTTPRequest.gd" id="7_pjv3x"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v0fib"]
 radius = 32.0
@@ -73,7 +74,8 @@ wait_time = 0.1
 [node name="SynchronizationTimer" type="Timer" parent="."]
 process_callback = 0
 
-[node name="HTTPRequest" type="HTTPRequest" parent="."]
+[node name="TextureDownloadHTTPRequest" type="HTTPRequest" parent="."]
+script = ExtResource("7_pjv3x")
 
 [connection signal="timeout" from="InterpolationTimer" to="." method="_on_interpolation_timer_timeout"]
 [connection signal="timeout" from="SynchronizationTimer" to="." method="_on_synchronization_timer_timeout"]

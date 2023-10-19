@@ -2,6 +2,7 @@ extends Node
 
 @onready var asteroid_spawner = $Asteroids
 @onready var player_spawner = $Players
+@onready var http_request = $SpaceshipsDatabaseDownloadHTTPRequest
 
 var player_users = {}
 
