@@ -2,6 +2,14 @@ extends HTTPRequest
 
 @export_global_file var spaceships_database_file = "user://.cache/PlayerSpaceships.json"
 
+func _ready():
+	var callable = Callable(self, "get_texture_downloaded_bytes")
+	Performance.add_custom_monitor("Network/Texture Download Bytes", callable)
+
+
+func get_texture_downloaded_bytes():
+	return get_downloaded_bytes()
+
 
 func download_spaceship(user, sprite_file):
 	var players_spaceships = {}

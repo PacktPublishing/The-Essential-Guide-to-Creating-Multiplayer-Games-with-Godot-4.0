@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://bh806by6bowfb" path="res://09.prototyping-space-adventure/Recipes/Hazard/HurtArea2D.tscn" id="4_0q8j3"]
 [ext_resource type="PackedScene" uid="uid://d01tn2bqqn35d" path="res://09.prototyping-space-adventure/Objects/Weapon/Weapon2D.tscn" id="5_y4mpx"]
 [ext_resource type="PackedScene" uid="uid://cql5xqnwibieq" path="res://09.prototyping-space-adventure/Objects/Bullet/Bullet2D.tscn" id="6_8lbu2"]
-[ext_resource type="PackedScene" uid="uid://21la7bu7agif" path="res://09.prototyping-space-adventure/TextureDownloadHttpRequest.tscn" id="7_an5i3"]
+[ext_resource type="PackedScene" uid="uid://21la7bu7agif" path="res://09.prototyping-space-adventure/TextureDownloadHTTPRequest.tscn" id="7_an5i3"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v0fib"]
 radius = 32.0
