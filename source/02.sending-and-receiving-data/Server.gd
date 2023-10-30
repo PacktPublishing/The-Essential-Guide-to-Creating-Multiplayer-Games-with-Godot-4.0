@@ -35,7 +35,7 @@ func load_database(path_to_database_file):
 
 
 func authenticate_player(peer, message):
-	var credentials = message
+	var credentials = message["authenticate_credentials"]
 	if "user" in credentials and "password" in credentials:
 		var user = credentials['user']
 		var password = credentials['password']
