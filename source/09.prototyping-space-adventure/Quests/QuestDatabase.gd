@@ -13,8 +13,8 @@ func _ready():
 	if multiplayer.is_server():
 		load_database()
 		
-		var update_quests = Callable(self, "get_quest_update_count")
-		Performance.add_custom_monitor("Network/Quests Updates", update_quests)
+		var callable = Callable(self, "get_quest_update_count")
+		Performance.add_custom_monitor("Network/Quests Updates", callable)
 
 
 func _notification(notification):
