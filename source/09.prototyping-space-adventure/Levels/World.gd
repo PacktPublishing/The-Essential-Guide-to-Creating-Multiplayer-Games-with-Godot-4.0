@@ -5,10 +5,13 @@ extends Node
 
 
 func _ready():
-	if not multiplayer.get_unique_id() == 1:
-		await(get_tree().create_timer(0.1).timeout)
+	if not multiplayer.is_server():
+		var server_connection = multiplayer.multiplayer_peer.get_peer(1)
+		var latency = server_connection.get_statistic(ENetPacketPeer.PEER_ROUND_TRIP_TIME) / (1000 * 2)
+		await get_tree().create_timer(latency).timeout
 		rpc_id(1, "sync_world")
 		rpc_id(1, "create_spaceship")
+			
 	else:
 		for i in 30:
 			asteroid_spawner.spawn()
@@ -20,7 +23,7 @@ func create_spaceship():
 	var spaceship = preload("res://09.prototyping-space-adventure/Actors/Player/Player2D.tscn").instantiate()
 	spaceship.name = str(player_id)
 	$Players.add_child(spaceship)
-	await(get_tree().create_timer(0.1).timeout)
+#	await(get_tree().create_timer(0.1).timeout)
 	spaceship.rpc("setup_multiplayer", player_id)
 
 
