@@ -16,15 +16,16 @@ extends Node2D
 
 @rpc("any_peer", "call_local")
 func setup_multiplayer(player_id):
-	var self_id = multiplayer.get_unique_id()
-	var is_player = self_id == player_id
-	set_process_unhandled_input(is_player)
-	camera.enabled = is_player
-	if not multiplayer.is_server():
-		camera.make_current()
-	else:
+	var is_server = multiplayer.is_server()
+	set_process(is_server)
+	set_physics_process(is_server)
+	set_process_unhandled_input(not is_server)
+	camera.enabled = not is_server
+	if is_server:
 		$InterpolationTimer.start()
 		$SynchronizationTimer.start()
+	else:
+		camera.make_current()
 
 
 func _unhandled_input(event):
