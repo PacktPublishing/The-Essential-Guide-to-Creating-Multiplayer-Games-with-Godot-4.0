@@ -19,9 +19,27 @@ If you feel this book is for you, get your [copy] (https://www.amazon.com/Essent
 <a href="https://www.packtpub.com/?utm_source=github&utm_medium=banner&utm_campaign=GitHubBanner"><img src="https://raw.githubusercontent.com/PacktPublishing/GitHub/master/GitHub.png" 
 alt="https://www.packtpub.com/" border="5" /></a>
 
-## Instructions and Navigations
-You are viewing the code portion of the book. 
-This repository consists of examples, snippets, links, and framework codebases.
-The chapters are linked below and have their own README files to guide you through the contents of those chapters.
 
-## Table of Contents
+## Instructions and Navigations
+All of the files is organized into folders. For example, chapter1.
+
+
+**Following is what you need for this book:**
+
+The Essential Guide to Creating Multiplayer Games with Godot 4.0 guides you in exploring the built-in network API for online multiplayer games, offering practical knowledge through concrete use cases.
+
+With the following software and hardware list you can run all code files present in the book (Chapter 1-9).
+
+### Software and Hardware List
+| Software required                    | OS required                         |
+| ------------------------------------ | ----------------------------------- |
+| Godot Engine 4.0                     | Windows, macOS, or Linux            |
+
+
+### Related products <Other books you may enjoy>
+* Godot 4 Game Development Projects.  [[Packt]](https://www.packtpub.com/product/godot-4-game-development-projects/9781804610404) [[Amazon]] (https://www.amazon.com/Godot-Game-Development-Projects-cross-platform/dp/1804610402)
+
+* Godot 4 Game Development Cookbook [[Packt]](https://www.packtpub.com/product/godot-4-game-development-cookbook/9781838826079) [[Amazon]] (https://www.amazon.com/Godot-Game-Development-Cookbook-high-quality-ebook/dp/B0BZDMM3P9/ref=cm_cr_arp_d_product_top?ie=UTF8)
+
+## Get to Know the Author
+**Henrique “Pigdev” Campos** is an indie game developer and game designer working in the industry for years, starting as a University teacher in 2015 in the Computer Graphics and Artificial Intelligence chairs and working in the GDQuest team from 2018 to 2022 on top of being an independent consultant for studios and schools. Under the alias of Pigdev, Henrique creates game development content on his YouTube channel. Using and contributing to the Godot Engine project since 2015, the author understands the design and vision of the project and how the tool evolved over the years, being in touch with the bleeding edge features.
