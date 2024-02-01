@@ -43,8 +43,8 @@ func authenticate_player(user, password):
 
 @rpc("any_peer", "call_remote")
 func start_game():
-	get_tree().change_scene_to_file(next_screen_scene_path)
 	rpc("start_game")
+	get_tree().change_scene_to_file(next_screen_scene_path)
 
 
 @rpc
