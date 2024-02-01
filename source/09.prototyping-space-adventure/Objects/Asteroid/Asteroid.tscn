@@ -206,19 +206,17 @@ gradient = SubResource("Gradient_p7db3")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ut075"]
 lifetime_randomness = 0.52
+particle_flag_disable_z = true
 emission_shape = 1
 emission_sphere_radius = 4.0
-particle_flag_disable_z = true
-spread = 180.0
-gravity = Vector3(0, 0, 0)
-initial_velocity_min = 500.0
-initial_velocity_max = 700.0
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
-damping_min = 1800.0
-damping_max = 2500.0
 angle_min = -275.3
 angle_max = 254.1
+spread = 180.0
+initial_velocity_min = 500.0
+initial_velocity_max = 700.0
+gravity = Vector3(0, 0, 0)
+damping_min = 1800.0
+damping_max = 2500.0
 scale_min = 12.0
 scale_max = 18.0
 color = Color(0.768627, 0.517647, 0.560784, 1)
@@ -236,10 +234,10 @@ bounce = 0.2
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_krk3o"]
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
-properties/0/sync = true
+properties/0/replication_mode = 1
 properties/1/path = NodePath(".:top_level")
 properties/1/spawn = true
-properties/1/sync = true
+properties/1/replication_mode = 1
 
 [node name="Asteroid" type="Node2D"]
 process_priority = -1

@@ -18,16 +18,14 @@ curve = SubResource("Curve_xtohv")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_imv6t"]
 lifetime_randomness = 0.8
+particle_flag_disable_z = true
 emission_shape = 3
 emission_box_extents = Vector3(640, 360, 1)
-particle_flag_disable_z = true
-gravity = Vector3(0, 0, 0)
-angular_velocity_min = 30.0
-angular_velocity_max = 80.0
-orbit_velocity_min = 0.0
-orbit_velocity_max = 0.0
 angle_min = -45.0
 angle_max = 45.0
+angular_velocity_min = 30.0
+angular_velocity_max = 80.0
+gravity = Vector3(0, 0, 0)
 scale_min = 0.3
 scale_curve = SubResource("CurveTexture_3p4qt")
 

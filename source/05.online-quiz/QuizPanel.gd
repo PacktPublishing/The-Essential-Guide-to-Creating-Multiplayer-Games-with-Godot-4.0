@@ -43,7 +43,7 @@ func player_missed(loser_name):
 	lock_answers()
 
 
-@rpc
+@rpc("any_peer", "call_local")
 func update_question(new_question_index):
 	var question = available_questions.pop_at(new_question_index)
 	if not question == null:

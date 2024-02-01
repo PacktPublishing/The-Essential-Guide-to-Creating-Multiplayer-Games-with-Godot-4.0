@@ -23,7 +23,6 @@ func create_spaceship():
 	var spaceship = preload("res://09.prototyping-space-adventure/Actors/Player/Player2D.tscn").instantiate()
 	spaceship.name = str(player_id)
 	$Players.add_child(spaceship)
-#	await(get_tree().create_timer(0.1).timeout)
 	spaceship.rpc("setup_multiplayer", player_id)
 
 
